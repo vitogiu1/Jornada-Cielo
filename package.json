@@ -1,0 +1,49 @@
+{
+  "name": "jornada-cielo",
+  "version": "0.4",
+  "description": "Um jogo para auxiliar no treinamento dos vendedores da cielo",
+  "authors": [
+    {
+      "name": "Bernardo de Assis Bittencourt e Silva",
+      "email": "bernardo.silva@sou.inteli.edu.br"
+    },
+    {
+      "name": "Felipe Limonge Macedo",
+      "email": "felipe.macedo@sou.inteli.edu.br"
+    },
+    {
+      "name": "José Guilherme Gonçalves Maia",
+      "email": "jose.maia@sou.inteli.edu.br"
+    },
+    {
+      "name": "Manoel de Souza Carneiro",
+      "email": "manoel.carneiro@sou.inteli.edu.br"
+    },
+    {
+      "name": "Miguel Bizzo Hirata de Deus",
+      "email": "miguel.deus@sou.inteli.edu.br"
+    },
+    {
+      "name": "Samuel Pereira Nascimento",
+      "email": "samuel.pereira@sou.inteli.edu.br"
+    },
+    {
+      "name": "Vito Giuliano Martins Pinheiro Machado Bertolai",
+      "email": "vito.bertolai@sou.inteli.edu.br"
+    }
+  ],
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
+  }
+}

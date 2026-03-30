@@ -1,0 +1,37 @@
+# --- Dependências ---
+node_modules/
+.pnp
+.pnp.js
+
+# --- Build / Saída ---
+dist/
+build/
+*.out
+
+# --- Logs ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# --- IDEs / Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# --- Ambiente / Segredos ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Temporários do Vite ---
+.vite/
