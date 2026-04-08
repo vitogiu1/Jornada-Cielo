@@ -1,20 +1,18 @@
-<img src="../assets/logointeli.png">
+<img src="./assets/logointeli.png">
 
 # GDD - Game Design Document - Módulo 1 - Inteli - Grupo 03
 
-**_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final_**
-
-## AlémCielo
+## Grupo 03: AlémCielo
 
 #### Nomes dos integrantes do grupo
 
-1. Bernardo de Assis Bittencourt e Silva
-2. Felipe Limonge Macedo
-3. José Guilherme Gonçalves Maia
-4. Manoel de Souza Carneiro
-5. Miguel Bizzo Hirata de Deus
-6. Samuel Pereira Nascimento
-7. Vito Giuliano Martins Pinheiro Machado Bertolai
+- <a href="https://www.linkedin.com/in/bernardo-bittencourt-27b8643aa">Bernardo de Assis Bittencourt e Silva</a>
+- <a href="https://www.linkedin.com/in/felipe-limonge/">Felipe Limonge Macedo</a>
+- <a href="http://linkedin.com/in/jos%C3%A9-guilherme-gon%C3%A7alves-maia-6078143aa">José Guilherme Gonçalves Maia</a>
+- <a href="https://www.linkedin.com/in/manoel-carneiro-b42898376">Manoel de Souza Carneiro</a>
+- <a href="http://www.linkedin.com/in/miguel-bizzo-hirata-de-deus-306b133a8">Miguel Bizzo Hirata de Deus</a>
+- <a href="http://www.linkedin.com/in/samuel-nascimento-997187234">Samuel Pereira Nascimento</a>
+- <a href="https://www.linkedin.com/in/vito-bertolai-b88260206/">Vito Giuliano Martins Pinheiro Machado Bertolai</a>
 
 ## Sumário
 
@@ -24,11 +22,11 @@
 
 [3. Game Design](#c3)
 
-[4. Desenvolvimento do jogo](#c4)
+[4. Desenvolvimento do Jogo](#c4)
 
 [5. Casos de Teste](#c5)
 
-[6. Conclusões e trabalhos futuros](#c6)
+[6. Conclusões e Trabalhos Futuros](#c6)
 
 [7. Referências](#c7)
 
@@ -92,7 +90,7 @@ Essa competição ampliada resultou em compressão estrutural de margens e maior
 
 <div align="center">
   <sub>Análise SWOT - Cielo S.A.</sub><br>
-  <img src="../assets/swot.png" width="100%" ><br>
+  <img src="./assets/swot.png" width="100%" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 
@@ -147,7 +145,7 @@ Compromisso com o desenvolvimento profissional, foco em resultados, aprendizado 
 
 <div align="center">
   <sub>Proposta de Valor</sub><br>
-  <img src="../assets/proposta_valor.png" width="100%" ><br>
+  <img src="./assets/proposta_valor.png" width="100%" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 
@@ -229,7 +227,7 @@ Esta seção detalha as ameaças e oportunidades identificadas para o projeto, i
 
 <div align="center">
   <sub>Matriz de Riscos</sub><br>
-  <img src="../assets/matriz_de_risco.png" width="100%" ><br>
+  <img src="./assets/matriz_de_risco.png" width="100%" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 
@@ -691,25 +689,25 @@ Essa possibilidade de escolha permite maior **identificação do jogador com o a
 
 <div align="center">
   <sub>Idle</sub><br>
-  <img src="../assets/idle.png" width="150" ><br>
+  <img src="./assets/idle.png" width="150" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 <div align="center">
   <sub>Amelia</sub><br>
-  <img src="../assets/Amelia_2.png" width="150" ><br>
+  <img src="./assets/Amelia_2.png" width="150" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 <div align="center">
   <sub>Amelia</sub><br>
-  <img src="../assets/amelia_3.png" width="150" ><br>
+  <img src="./assets/amelia_3.png" width="150" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 <div align="center">
   <sub>Bob</sub><br>
-  <img src="../assets/bob.png" width="150" ><br>
+  <img src="./assets/bob.png" width="150" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -853,7 +851,7 @@ As imagens utilizadas nesta seção foram **geradas com o auxílio de ferramenta
 
 <div align="center">
   <sub>Cadastro do jogador</sub><br>
-  <img src="../assets/concept2.png" width="300" ><br>
+  <img src="./assets/concept2.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -863,7 +861,7 @@ Imagem que representa cadastro do jogador, possibilitando que o progresso seja s
 
 <div align="center">
   <sub>Visão geral do jogo</sub><br>
-  <img src="../assets/concept1.png" width="300" ><br>
+  <img src="./assets/concept1.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -873,7 +871,7 @@ Concept art que resume aspectos gerais do jogo, incluindo acesso e navegação b
 
 <div align="center">
   <sub>Interação básica do jogo</sub><br>
-  <img src="../assets/concept3.png" width="300" ><br>
+  <img src="./assets/concept3.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -883,7 +881,7 @@ Concept que representa uma interação básica do jogo, mostrando barra de miss�
 
 <div align="center">
   <sub>Seleção de mundo</sub><br>
-  <img src="../assets/concept4.png" width="300" ><br>
+  <img src="./assets/concept4.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -893,7 +891,7 @@ Imagem que demonstra uma ideia de seleção de mundo, nessa imagem as opções s
 
 <div align="center">
   <sub>Progressão de fases</sub><br>
-  <img src="../assets/concept5.png" width="300" ><br>
+  <img src="./assets/concept5.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -903,7 +901,7 @@ Imagem que representa a progressão de fases, que serão usadas para aumentar o 
 
 <div align="center">
   <sub>Interação vendedor e cliente</sub><br>
-  <img src="../assets/concept6.png" width="300" ><br>
+  <img src="./assets/concept6.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -980,21 +978,21 @@ Esse fluxo representa a sequência principal da experiência do jogador dentro d
 
 <div align="center">
   <sub>GameFlow - Cenas</sub><br>
-  <img src="../assets/GameFlow.jpg" width="300" ><br>
+  <img src="./assets/GameFlow.jpg" width="100%" height="100%"><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 
 <div align="center">
   <sub>GameFlow</sub><br>
-  <img src="../assets/GameFlow1.png" width="300" ><br>
+  <img src="./assets/GameFlow1.png" width="100%" height="100%"><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 
 <div align="center">
   <sub>Diagrama de cenas e de classes</sub><br>
-  <img src="../assets/Diagrama.png" width="300" ><br>
+  <img src="./assets/Diagrama.png" width="100%" height="100%"><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1299,7 +1297,7 @@ Durante o sprint 1, foi elaborada a tela inicial do nosso jogo, contando com alg
 
 <div align="center">
   <sub>Tela inicial</sub><br>
-  <img src="../assets/tela-inicial.png" width="300" ><br>
+  <img src="./assets/tela-inicial.png" width="300" ><br>
   <sup>Fonte: Autores/Gemini</sup>
 </div>
 <br>
@@ -1309,7 +1307,7 @@ Essa imagem é um prototipo da nossa ideia final, possuindo os botões: Iniciar;
 
 <div align="center">
   <sub>Imagem prototipo</sub><br>
-  <img src="../assets/imagem-prototipo.png" width="300" ><br>
+  <img src="./assets/imagem-prototipo.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1323,7 +1321,7 @@ Primeiramente pensamos em apenas um mundo pequeno, mas era necessário fazer um 
 
 <div align="center">
   <sub>Idle</sub><br>
-  <img src="../assets/idle.png" width="250" ><br>
+  <img src="./assets/idle.png" width="250" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1333,7 +1331,7 @@ Essa imagem representa o spritesheet de um dos prototipos que será usado no des
 
 <div align="center">
   <sub>Prototipo de alteração de cenário</sub><br>
-  <img src="../assets/proti.png" width="300" ><br>
+  <img src="./assets/proti.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1345,7 +1343,7 @@ Esse desenvolvimento foi feito a fim de testes de como o jogo se comporta com mu
 
 <div align="center">
   <sub>Mobile</sub><br>
-  <img src="../assets/mobile.png" width="180" ><br>
+  <img src="./assets/mobile.png" width="180" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1360,7 +1358,7 @@ Durante a sprint 2, foi elaborado os sprites dos personagens principais do jogo 
 
 <div align="center">
   <sub>Personagens</sub><br>
-  <img src="../assets/pers (7).png" width="300" ><br>
+  <img src="./assets/pers (7).png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1370,7 +1368,7 @@ Atualização da tela inicial. Fundo adicionado para melhorar a experiência vis
 
 <div align="center">
   <sub>Personagens</sub><br>
-  <img src="../assets/perso.png" width="300" ><br>
+  <img src="./assets/perso.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1380,7 +1378,7 @@ Pesonagens adicionados para possibilitar inclusão e representatividade para os 
 
 <div align="center">
   <sub>Primeiro ambiente do jogo</sub><br>
-  <img src="../assets/fundo.png" width="300" ><br>
+  <img src="./assets/fundo.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1390,7 +1388,7 @@ Primeiro ambiente do jogo, mostrando o tutorial de movimentação.
 
 <div align="center">
   <sub>Configurações</sub><br>
-  <img src="../assets/config.png" width="300" ><br>
+  <img src="./assets/config.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1400,21 +1398,21 @@ Imagem que representa o que aparece na aba de configurações.
 
 <div align="center">
   <sub>Tela de configurações</sub><br>
-  <img src="../assets/tel.png" width="300" ><br>
+  <img src="./assets/tel.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 
 <div align="center">
   <sub>Tela Inicial - Mobile</sub><br>
-  <img src="../assets/efo.png" width="300" ><br>
+  <img src="./assets/efo.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 
 <div align="center">
   <sub>Seleção de personagem - Mobile</sub><br>
-  <img src="../assets/ne.png" width="300" ><br>
+  <img src="./assets/ne.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1507,14 +1505,14 @@ Essa etapa consolida a transição de um sistema técnico para um produto intera
 
 <div align="center">
   <sub>Tela inicial do jogo</sub><br>
-  <img src="../assets/tela_inicial.png" width="300" ><br>
+  <img src="./assets/tela_inicial.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
 
 <div align="center">
   <sub>Primeiro ambiente do jogo após o tutorial</sub><br>
-  <img src="../assets/inicial.png" width="300" ><br>
+  <img src="./assets/inicial.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1548,7 +1546,7 @@ As funcionalidades estão integradas entre si, garantindo consistência na exper
 
 <div align="center">
   <sub>Tela de negociação</sub><br>
-  <img src="../assets/negociacao.png" width="300" ><br>
+  <img src="./assets/negociacao.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1600,7 +1598,7 @@ Isso permite:
 
 O projeto segue uma arquitetura modular bem definida:
 
-#### 🔹 Estrutura de Pastas
+#### Estrutura de Pastas
 
 - `core/` → Configuração e inicialização
 - `entities/` → Entidades do jogo (Player, NPC)
@@ -1608,7 +1606,7 @@ O projeto segue uma arquitetura modular bem definida:
 - `data/` → Dados estruturados (NPCs, negociações)
 - `scenes/` → Cenas do jogo (mapas, menus, UI, combate)
 
-#### 🔹 Padrões adotados
+#### Padrões adotados
 
 - Uso consistente de `camelCase`
 - Métodos privados com prefixo `_`
@@ -1623,7 +1621,7 @@ Essa organização garante:
 
 <div align="center">
   <sub>Organização das pastas</sub><br>
-  <img src="../assets/estrutura.png" width="300" ><br>
+  <img src="./assets/estrutura.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1648,7 +1646,7 @@ Isso permite que qualquer desenvolvedor compreenda rapidamente o funcionamento d
 
 <div align="center">
   <sub>Exemplo de código comentado</sub><br>
-  <img src="../assets/codigo.png" width="300" ><br>
+  <img src="./assets/codigo.png" width="300" ><br>
   <sup>Fonte: Autores</sup>
 </div>
 <br>
@@ -1659,17 +1657,17 @@ Isso permite que qualquer desenvolvedor compreenda rapidamente o funcionamento d
 
 O versionamento foi realizado via Git, com commits organizados por funcionalidades.
 
-#### ✔️ Pontos positivos
+#### Pontos positivos
 
 - Uso de prefixos de versão
 - Registro das principais evoluções do projeto
 
-#### ⚠️ Ponto de melhoria identificado
+#### Ponto de melhoria identificado
 
 - Commits monolíticos (muito grandes)
 - Concentração de commits em um único integrante
 
-#### 🔧 Plano de melhoria adotado
+#### Plano de melhoria adotado
 
 - Divisão de commits por funcionalidade (ex: inventário, batalha, HUD)
 - Padronização de mensagens (`feat`, `fix`, `refactor`)
@@ -1755,7 +1753,7 @@ O jogo **Jornada Cielo** encontra-se pronto para validação externa e iteraçã
 
 _Descreva e ilustre aqui o desenvolvimento dos refinamentos e revisões da versão final do jogo, explicando brevemente o que foi entregue em termos de MVP. Utilize prints de tela para ilustrar._
 
-# <a name="c5"></a>5. Testes
+# <a name="c5"></a>5. Casos de Teste
 
 ## 5.1. Casos de Teste (sprints 2 a 4)
 

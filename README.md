@@ -1,12 +1,14 @@
 # Inteli - Instituto de Tecnologia e Liderança
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="assets/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width=40% height=40%></a>
+<a href= "https://www.inteli.edu.br/"><img src="documents/assets/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width=40% height=40%></a>
 </p>
 
 <br>
 
-# Jornada Cielo
+# Grupo 03: AlémCielo
+
+# Projeto: Jornada Cielo
 
 ## 👨‍🎓 Integrantes:
 
@@ -22,34 +24,39 @@
 
 ### Orientador(a)
 
-- <a href="https://br.linkedin.com/in/vanunes">Vanessa Nunes</a>
+- <a href="https://br.linkedin.com/in/vanunes">Vanessa Tavares Nunes</a>
 
 ### Instrutores
 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 1</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 2</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 3</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 4</a>
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do instrutor 5</a>
+- <a href="https://www.linkedin.com/in/anacristinadossantos/">Ana Cristina dos Santos</a>
+- <a href="https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/">Cristiano da Silva Benites</a>
+- <a href="https://www.linkedin.com/in/fabiana-martins-de-oliveira-8993b0b2/">Fabiana Martins de Oliveira</a>
+- <a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/">Geraldo Magela Severino Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/pedroteberga/">Pedro Marins Freire Teberga</a>
 
 ## 📜 Descrição
 
-Jornada Cielo é um jogo de aventura, focado no auxilio e treinamento dos Gerentes de Negócios da Cielo.
-Misturando elementos de RPG dos principais jogos clássicos, Jornada Cielo mistura a diversão com o aprendizado, entendendo como as relações no mundo real podem se diferenciar do treinamento, mas que nunca é o fim.
+Jornada Cielo é um jogo de aventura, treinamento e educação, focado no auxilio e treinamento dos Gerentes de Negócios da Cielo. Inspirado na estética e na mecânica dos grandes clássicos do RPG, o projeto transforma o aprendizado técnico em uma experiência lúdica, imersiva e altamente estratégica.
+No jogo, o colaborador assume o papel de um protagonista em um universo de desafios comerciais. O objetivo é navegar pelas complexidades e adversidades do mercado, para conseguir fornecer e apresentar para os clientes soluções inovadoras que a Cielo possui, utilizando das ferramentas da empresa como "equipamentos" para conquistar objetivos e superar a resistência dos clientes.
+A Jornada Cielo demonstra que, com a estratégia certa e as habilidades bem desenvolvidas, todo Gerente de Negócios pode se tornar um mestre em transformar desafios em parcerias de sucesso, e fechar ótimos negócios.
 
-<a href="https://graduacao.pages.git.inteli.edu.br/2026-1a/t28/g03/"> Link do jogo </a>
+## 🚀 Versão jogável
+
+<a href="https://graduacao.pages.git.inteli.edu.br/2026-1a/t28/g03/"> Versão jogável (Gitlab)</a>
+<br>
+<a href="https://vitogiu1.github.io/Jornada-Cielo/"> Versão jogável (Github)</a>
 
 ## 📁 Estrutura de pastas
 
 Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
-- <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
+- <b>public</b>: aqui estão os arquivos que serão publicados no pages e as imagens do jogo.
 
-- <b>public</b>: aqui estão os arquivos que serão publicados no GitLab Pages e as imagens do jogo.
+- <b>documents</b>: aqui estão todos os documentos do projeto, como o Game Development Document (GDD) bem como documentos complementares, na pasta "other".
 
-- <b>document</b>: aqui estão todos os documentos do projeto, como o Game Development Document (GDD) bem como documentos complementares, na pasta "other".
+- <b>documents/assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
 
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto do jogo.
+- <b>public/src</b>: Todo o código fonte criado para o desenvolvimento do projeto do jogo.
 
 - <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto e o jogo (o mesmo que você está lendo agora).
 
@@ -212,4 +219,4 @@ npm run build
 
 ## 📋 Licença/License
 
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Intelihub/Template_M1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Intelihub/Template_M1">Inteli, Bernardo de Assis Bittencourt e Silva, Felipe Limonge Macedo, José Guilherme Gonçalves Maia, Manoel de Souza Carneiro, Miguel Bizzo Hirata de Deus, Samuel Pereira Nascimento, Vito Giuliano Martins Pinheiro Machado Bertolai</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Intelihub/Template_M1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Intelihub">Inteli,</a> <a href="https://www.linkedin.com/in/bernardo-bittencourt-27b8643aa/">Bernardo de Assis Bittencourt e Silva</a>, <a href="https://www.linkedin.com/in/felipe-limonge/">Felipe Limonge Macedo</a>, <a href="http://linkedin.com/in/jos%C3%A9-guilherme-gon%C3%A7alves-maia-6078143aa">José Guilherme Gonçalves Maia</a>, <a href="https://www.linkedin.com/in/manoel-carneiro-b42898376">Manoel de Souza Carneiro</a>, <a href="http://www.linkedin.com/in/miguel-bizzo-hirata-de-deus-306b133a8">Miguel Bizzo Hirata de Deus</a>, <a href="http://www.linkedin.com/in/samuel-nascimento-997187234">Samuel Pereira Nascimento</a>, <a href="https://www.linkedin.com/in/vito-bertolai-b88260206/">Vito Giuliano Martins Pinheiro Machado Bertolai</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
