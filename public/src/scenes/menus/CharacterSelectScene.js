@@ -26,7 +26,7 @@ export class CharacterSelectScene extends Phaser.Scene {
     this.add.rectangle(0, 0, width, height, 0x000000, 0.8).setOrigin(0);
 
     // Título da tela, adaptado para mobile.
-    const titleText = isMobile ? "QUEM VOCÊ SERÁ?" : "ESCOLHA SEU PERSONAGEM";
+    const titleText = "ESCOLHA SEU VISUAL";
     this.add
       .text(width / 2, isMobile ? 50 : 80, titleText, {
         fontSize: isMobile ? "24px" : "32px",
@@ -70,15 +70,6 @@ export class CharacterSelectScene extends Phaser.Scene {
         .setInteractive({ useHandCursor: true });
 
       charSprite.play(`${char.key}-idle-down`);
-
-      // Nome do personagem abaixo do sprite.
-      const nameText = this.add
-        .text(x, y + (isMobile ? 80 : 120), char.name, {
-          fontSize: isMobile ? "16px" : "20px",
-          fill: "#ffffff",
-          fontFamily: "Arial",
-        })
-        .setOrigin(0.5);
 
       // Ao clicar, aplica um tint azul e inicia a transição.
       charSprite.on("pointerdown", () => {

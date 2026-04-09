@@ -111,21 +111,15 @@ export class NegotiationScene extends Phaser.Scene {
       this.sound.getAll(key).forEach((s) => s.stop());
     });
 
-    // Inicia a música da negociação em loop com fade-in suave.
-    this.negotiationMusic = this.sound.add("music_negotiation", {
-      loop: true,
-      volume: 0,
-    });
-    this.negotiationMusic.play();
-
     // Respeita o volume configurado nas Settings.
     const targetVol = this.registry.get("musicVolume") ?? 0.3;
 
-    this.tweens.add({
-      targets: this.negotiationMusic,
+    // Inicia a música da negociação em loop
+    this.negotiationMusic = this.sound.add("music_negotiation", {
+      loop: true,
       volume: targetVol,
-      duration: 1000,
     });
+    this.negotiationMusic.play();
 
     // Para a música imediatamente ao encerrar a cena.
     this.events.once("shutdown", () => {
@@ -150,17 +144,17 @@ export class NegotiationScene extends Phaser.Scene {
 
     // Sprite do jogador
     this.playerSprite = this.add
-      .sprite(w * 0.25, avatarY, `${this.playerKey}-idle-down`)
+      .sprite(w * 0.25, avatarY, `${this.playerKey}-idle`)
       .setScale(scale)
       .setFlipX(true);
     if (this.anims.exists(`${this.playerKey}-idle-down`)) {
       this.playerSprite.play(`${this.playerKey}-idle-down`);
     }
 
-    // Sprite do inimigo.
+    // Sprite do cliente.
     const eKey = this.negotiationData.enemyKey;
     this.enemySprite = this.add
-      .sprite(w * 0.75, avatarY, `${eKey}-idle-down`)
+      .sprite(w * 0.75, avatarY, `${eKey}-idle`)
       .setScale(scale);
     if (this.anims.exists(`${eKey}-idle-down`)) {
       this.enemySprite.play(`${eKey}-idle-down`);
@@ -1330,6 +1324,15 @@ export class NegotiationScene extends Phaser.Scene {
   _showLevelUpEffect(level) {
     const { width: w, height: h } = this.scale;
 
+    this.sound.pauseAll();
+    const sfxVolume = this.registry.get("sfxVolume") ?? 0.7;
+    const levelUpSound = this.sound.add("sfx_levelup", { volume: sfxVolume });
+    levelUpSound.play();
+
+    levelUpSound.once("complete", () => {
+      this.sound.resumeAll();
+    });
+
     const levelUpText = this.add
       .text(w / 2, h / 2 - 40, "SUBIU DE NÍVEL!", {
         fontFamily: "Arial",
@@ -1398,7 +1401,11 @@ export class NegotiationScene extends Phaser.Scene {
     if (this._won && this.worldId) {
       const justCompleted = ProgressManager.checkWorldCompletion(this.worldId);
       if (justCompleted) {
-        this._showMissionComplete();
+        if (this.worldId === "industrial") {
+          this._showGameEnding();
+        } else {
+          this._showMissionComplete();
+        }
         return;
       }
     }
@@ -1411,6 +1418,25 @@ export class NegotiationScene extends Phaser.Scene {
 
     this.scene.resume(this.returnScene);
     this.scene.stop();
+  }
+
+  /** Exibe a tela de vitória final (Ending Scene). */
+  _showGameEnding() {
+    // Para as cenas da interface antes de exibir a cena de vitória
+    const scenesToStop = [this.returnScene, "PlayerHudScene", "MobileHudScene"];
+    scenesToStop.forEach((key) => {
+      try {
+        if (
+          this.scene.isActive(key) ||
+          this.scene.isPaused(key) ||
+          this.scene.isSleeping(key)
+        ) {
+          this.scene.stop(key);
+        }
+      } catch (e) {}
+    });
+
+    this.scene.start("EndingScene");
   }
 
   /** Exibe a tela de missão concluída e volta ao seletor de mundos. */

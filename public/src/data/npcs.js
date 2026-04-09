@@ -22,8 +22,8 @@ export const interiorNPCs = {
   EstacionamentoScene: [
     {
       id: "estacionamento_city_1",
-      name: "Valet Thiago",
-      characterKey: "thiago",
+      name: "Valet Marcos",
+      characterKey: "npc4",
       x: 512,
       y: 350,
       negotiationId: "estacionamento_city_1",
@@ -37,8 +37,8 @@ export const interiorNPCs = {
   SorveteriaScene: [
     {
       id: "sorveteria_city_1",
-      name: "Amélia",
-      characterKey: "amelia",
+      name: "Sorveteiro Marcos",
+      characterKey: "npc_praia",
       x: 512,
       y: 350,
       negotiationId: "sorveteria_city_1",
@@ -52,8 +52,8 @@ export const interiorNPCs = {
   MuseuScene: [
     {
       id: "museu_city_1",
-      name: "Curador Alan",
-      characterKey: "alan",
+      name: "Curador Otávio",
+      characterKey: "npc_praia2",
       x: 512,
       y: 350,
       negotiationId: "museu_city_1",
@@ -67,8 +67,8 @@ export const interiorNPCs = {
   TeatroScene: [
     {
       id: "teatro_city_1",
-      name: "Atriz Amanda",
-      characterKey: "amanda",
+      name: "Ator João",
+      characterKey: "npc_praia3",
       x: 512,
       y: 350,
       negotiationId: "teatro_city_1",
@@ -82,8 +82,8 @@ export const interiorNPCs = {
   FloriculturaScene: [
     {
       id: "floricultura_city_1",
-      name: "Florista Ingrid",
-      characterKey: "ingrid",
+      name: "Florista Rosa",
+      characterKey: "npc4",
       x: 512,
       y: 350,
       negotiationId: "floricultura_city_1",
@@ -97,8 +97,8 @@ export const interiorNPCs = {
   ChaveiroScene: [
     {
       id: "chaveiro_city_1",
-      name: "Chaveiro Carlos",
-      characterKey: "thiago",
+      name: "Chaveiro Beto",
+      characterKey: "npc_praia",
       x: 512,
       y: 350,
       negotiationId: "chaveiro_city_1",
@@ -114,8 +114,8 @@ export const interiorNPCs = {
   BarScene: [
     {
       id: "bar_farm_1",
-      name: "Felipe do Bar",
-      characterKey: "alan",
+      name: "Barman Zeca",
+      characterKey: "npc_fazenda",
       x: 512,
       y: 200,
       negotiationId: "bar_farm_1",
@@ -129,8 +129,8 @@ export const interiorNPCs = {
   LojaScene: [
     {
       id: "loja_farm_1",
-      name: "Lojista Amélia",
-      characterKey: "amelia",
+      name: "Lojista Silvio",
+      characterKey: "npc_fazenda2",
       x: 512,
       y: 500,
       negotiationId: "loja_farm_1",
@@ -144,8 +144,8 @@ export const interiorNPCs = {
   CasaAmarelaScene: [
     {
       id: "casa1_farm_1",
-      name: "Morador Thiago",
-      characterKey: "thiago",
+      name: "Morador Juca",
+      characterKey: "npc_fazenda3",
       x: 512,
       y: 350,
       negotiationId: "casa1_farm_1",
@@ -159,8 +159,8 @@ export const interiorNPCs = {
   CasaAmarela2Scene: [
     {
       id: "casa2_farm_1",
-      name: "Artesã Amanda",
-      characterKey: "amanda",
+      name: "Artesão André",
+      characterKey: "npc_fazenda",
       x: 512,
       y: 350,
       negotiationId: "casa2_farm_1",
@@ -174,8 +174,8 @@ export const interiorNPCs = {
   CeleiroScene: [
     {
       id: "celeiro_farm_1",
-      name: "Fazendeiro Alan",
-      characterKey: "alan",
+      name: "Fazendeiro Tonho",
+      characterKey: "npc_fazenda2",
       x: 512,
       y: 350,
       negotiationId: "celeiro_farm_1",
@@ -189,8 +189,8 @@ export const interiorNPCs = {
   QuiosquePraiaScene: [
     {
       id: "quiosquep_beach_1",
-      name: "Carlos do Coco",
-      characterKey: "thiago",
+      name: "Banhista Dudu",
+      characterKey: "npc_praia3",
       x: 512,
       y: 750,
       negotiationId: "carlos_praia_1",
@@ -204,8 +204,8 @@ export const interiorNPCs = {
   LojaPraiaScene: [
     {
       id: "lojap_beach_1",
-      name: "Artesã Marina",
-      characterKey: "amelia",
+      name: "Artesão Moisés",
+      characterKey: "npc_praia",
       x: 512,
       y: 750,
       negotiationId: "carlos_praia_2",
@@ -219,8 +219,8 @@ export const interiorNPCs = {
   QuiosDoisPraiaScene: [
     {
       id: "quiosque2_beach_1",
-      name: "Thiago dos Petiscos",
-      characterKey: "thiago",
+      name: "Cozinheiro Léo",
+      characterKey: "npc_praia",
       x: 512,
       y: 750,
       negotiationId: "quiosque2_beach_1",
@@ -234,8 +234,8 @@ export const interiorNPCs = {
   QuiosSurfScene: [
     {
       id: "quiossurf_beach_1",
-      name: "Instrutor Alan",
-      characterKey: "alan",
+      name: "Instrutor Vitor",
+      characterKey: "npc_praia2",
       x: 512,
       y: 700,
       negotiationId: "quiossurf_beach_1",
@@ -249,8 +249,8 @@ export const interiorNPCs = {
   QuiosTresScene: [
     {
       id: "quiosque3_beach_1",
-      name: "Amélia do Açaí",
-      characterKey: "amelia",
+      name: "Vendedor Carlos",
+      characterKey: "npc_praia3",
       x: 512,
       y: 700,
       negotiationId: "quiosque3_beach_1",
@@ -265,8 +265,8 @@ export const interiorNPCs = {
   MecanicaScene: [
     {
       id: "mecanica_ind_1",
-      name: "Mecânico Thiago",
-      characterKey: "thiago",
+      name: "Mecânico César",
+      characterKey: "npc_industrial",
       x: 512,
       y: 750,
       negotiationId: "mecanica_ind_1",
@@ -280,8 +280,8 @@ export const interiorNPCs = {
   CentroMotorScene: [
     {
       id: "centromotor_ind_1",
-      name: "Supervisora Ingrid",
-      characterKey: "ingrid",
+      name: "Supervisor José",
+      characterKey: "npc_industrial2",
       x: 512,
       y: 750,
       negotiationId: "centromotor_ind_1",
@@ -295,8 +295,8 @@ export const interiorNPCs = {
   CentroSuprimentoScene: [
     {
       id: "centrosuprimento_ind_1",
-      name: "Fornecedor Alan",
-      characterKey: "alan",
+      name: "Fornecedor Fábio",
+      characterKey: "npc_industrial",
       x: 512,
       y: 750,
       negotiationId: "centrosuprimento_ind_1",
@@ -310,8 +310,8 @@ export const interiorNPCs = {
   CentroDePecasScene: [
     {
       id: "centrodepecas_ind_1",
-      name: "Estoquista Amanda",
-      characterKey: "amanda",
+      name: "Estoquista Paulo",
+      characterKey: "npc_industrial2",
       x: 512,
       y: 750,
       negotiationId: "centrodepecas_ind_1",
@@ -325,8 +325,8 @@ export const interiorNPCs = {
   GalpaoMergulhoScene: [
     {
       id: "galpaomergulho_ind_1",
-      name: "Roberto da Logística",
-      characterKey: "alan",
+      name: "Gerente Denis",
+      characterKey: "npc_industrial",
       x: 512,
       y: 750,
       negotiationId: "galpaomergulho_ind_1",
@@ -340,8 +340,8 @@ export const interiorNPCs = {
   SecaoHidraulicaScene: [
     {
       id: "secaohidraulica_ind_1",
-      name: "Técnica Amélia",
-      characterKey: "amelia",
+      name: "Técnico Laerte",
+      characterKey: "npc_industrial2",
       x: 512,
       y: 750,
       negotiationId: "secaohidraulica_ind_1",
@@ -364,8 +364,8 @@ export const industrialNPCs = [];
 export const cieloHQNPCs = [
   {
     id: "amelia_cielo",
-    name: "Amélia (Cielo)",
-    characterKey: "amelia",
+    name: "Guia Cielo",
+    characterKey: "thiago",
     x: 416,
     y: 150,
     dialogs: [

@@ -49,6 +49,31 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // Toca a animação idle inicial.
     this.play(`${this.characterKey}-idle-down`);
+
+    // Prepara o som de caminhada
+    if (scene.sound.get("sfx_walk") === null && scene.cache.audio.exists("sfx_walk")) {
+      // Garantir que a key existe apenas como teste preventivo
+    }
+    
+    // Configura o áudio para loop, deixando em pausa de inicio
+    this.walkSound = scene.sound.add("sfx_walk", { loop: true });
+
+    // Evita som fantasma/vazamento quando a cena for pausada ou colocada para dormir
+    scene.events.on("pause", () => {
+      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.pause();
+    });
+    scene.events.on("sleep", () => {
+      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.pause();
+    });
+
+    // Limpa o som para evitar vazamento de memória e sobreposição
+    // quando o player/cena for destruído (ex: trocar de mapa).
+    this.on("destroy", () => {
+      if (this.walkSound) {
+        this.walkSound.stop();
+        this.walkSound.destroy();
+      }
+    });
   }
 
   /** Troca o sprite do personagem para outro characterKey. */
@@ -150,6 +175,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     // Toca a animação de corrida ou idle na direção atual.
     const animState = moving ? "run" : "idle";
     this.play(`${this.characterKey}-${animState}-${this.lastDir}`, true);
+
+    // Sincroniza o som de andar com o movimento
+    const sfxVolume = this.scene.registry.get("sfxVolume") ?? 0.7;
+    // O som de pé é geralmente alto, então podemos atenuar pouca coisa do volume global
+    this.walkSound.setVolume(sfxVolume * 0.8);
+
+    if (moving) {
+      if (!this.walkSound.isPlaying) {
+        this.walkSound.play();
+      }
+    } else {
+      if (this.walkSound.isPlaying) {
+        this.walkSound.pause();
+      }
+    }
 
     return moving;
   }

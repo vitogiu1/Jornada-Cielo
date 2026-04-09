@@ -128,7 +128,7 @@ export class MenuScene extends Phaser.Scene {
         .setInteractive({ useHandCursor: true })
         .on("pointerdown", () => {
           this.scene.stop(pausedSceneKey);
-          this.scene.start("CharacterSelectScene");
+          this.scene.start("NameInputScene");
         });
 
       const settingsBtn = this.add
@@ -156,7 +156,7 @@ export class MenuScene extends Phaser.Scene {
         .setOrigin(0.5)
         .setInteractive({ useHandCursor: true })
         .on("pointerdown", () => {
-          this.scene.start("CharacterSelectScene");
+          this.scene.start("NameInputScene");
         });
 
       const settingsButton = this.add

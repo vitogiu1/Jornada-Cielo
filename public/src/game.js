@@ -12,6 +12,8 @@ import { FarmScene } from "./scenes/maps/FarmScene";
 import { BeachScene } from "./scenes/maps/BeachScene";
 import { IndustrialScene } from "./scenes/maps/IndustrialScene";
 import { CharacterSelectScene } from "./scenes/menus/CharacterSelectScene";
+import { NameInputScene } from "./scenes/menus/NameInputScene";
+import { EndingScene } from "./scenes/menus/EndingScene";
 import { WorldMapScene } from "./scenes/menus/WorldMapScene";
 import { NegotiationScene } from "./scenes/negotiation/NegotiationScene";
 import { PauseScene } from "./scenes/menus/PauseScene";
@@ -22,8 +24,28 @@ import { InventoryScene } from "./scenes/ui/InventoryScene";
 import { CielodexScene } from "./scenes/ui/CielodexScene";
 import { InteriorScene } from "./scenes/maps/InteriorScene";
 import { TutorialOverlayScene } from "./scenes/ui/TutorialOverlayScene";
+import { ColorBlind } from "./utils/ColorBlind";
 
-// ─── Instâncias de cenas interiores da CIDADE ───
+// Sistema de global para chamar o som de clique, quando ocorrer eventos de clique
+const start = Phaser.Input.InputPlugin.prototype.start;
+Phaser.Input.InputPlugin.prototype.start = function () {
+  start.call(this);
+  this.on("gameobjectdown", (pointer, gameObject) => {
+    if (gameObject.input && gameObject.input.draggable) return;
+    try {
+      if (this.scene && this.scene.registry && this.scene.sound) {
+        const vol = this.scene.registry.get("sfxVolume") ?? 0.7;
+        if (this.scene.cache.audio.exists("sfx_click")) {
+          this.scene.sound.play("sfx_click", { volume: vol * 0.8 });
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao tocar som de clique:", e);
+    }
+  });
+};
+
+// ─── Instâncias de cenas interiores da cidade ───
 const ChaveiroScene = new InteriorScene({
   key: "ChaveiroScene",
   mapKey: "chaveiro-map",
@@ -73,7 +95,7 @@ const TeatroScene = new InteriorScene({
   returnSpawn: { x: 515, y: 535 },
 });
 
-// ─── Instâncias de cenas interiores da FAZENDA ───
+// ─── Instâncias de cenas interiores da fazenda ───
 const BarScene = new InteriorScene({
   key: "BarScene",
   mapKey: "bar-map",
@@ -110,7 +132,7 @@ const CeleiroScene = new InteriorScene({
   parentScene: "FarmScene",
 });
 
-// ─── Instâncias de cenas interiores da PRAIA ───
+// ─── Instâncias de cenas interiores da praia ───
 const QuiosquePraiaScene = new InteriorScene({
   key: "QuiosquePraiaScene",
   mapKey: "quiosquep-map",
@@ -152,7 +174,7 @@ const QuiosTresScene = new InteriorScene({
   returnSpawn: { x: 680, y: 880 },
 });
 
-// ─── Instâncias de cenas interiores da INDÚSTRIA ───
+// ─── Instâncias de cenas interiores da indústria ───
 const CentroDePecasScene = new InteriorScene({
   key: "CentroDePecasScene",
   mapKey: "centrodepecas-map",
@@ -231,6 +253,8 @@ const config = {
     PreloadScene,
     MenuScene,
     SettingsScene,
+    NameInputScene,
+    EndingScene,
     CieloScene,
     CityScene,
     FarmScene,
@@ -294,7 +318,21 @@ const config = {
       debug: false,
     },
   },
+
+  /** Suporte para elementos DOM (necessario para inputs HTML nativos). */
+  dom: {
+    createContainer: true,
+  },
 };
 
-/** Inicializa o jogo Phaser com a configuração definida acima. */
-new Phaser.Game(config);
+/** Inicializa o jogo Phaser com a configuracao definida acima. */
+const game = new Phaser.Game(config);
+
+// Inicializa a aba de Filtro de Daltonismo e aplica caso tenha no Registry do cache / LocalStorage
+ColorBlind.initFilters();
+game.events.once('ready', () => {
+  // Como o Phaser.Registry de cada cena é resetado dependendo do ciclo,
+  // vamos usar localStorage para persistir de verdade a configuração de Daltonismo.
+  const savedFilter = localStorage.getItem("daltonismFilter") || "none";
+  ColorBlind.applyFilter(savedFilter);
+});

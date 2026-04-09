@@ -245,15 +245,21 @@ export class PreloadScene extends Phaser.Scene {
     );
 
     // Músicas de fundo.
-    this.load.audio("music_menu", "assets/sounds/mainMenu.mp3");
-    this.load.audio("music_negotiation", "assets/sounds/negotiation.mp3");
+    this.load.audio("music_menu", "assets/sounds/themes/mainMenu.mp3");
+    this.load.audio(
+      "music_negotiation",
+      "assets/sounds/themes/negotiation.mp3",
+    );
+    this.load.audio("sfx_levelup", "assets/sounds/sfx/levelUp.mp3");
+    this.load.audio("sfx_walk", "assets/sounds/sfx/walk.mp3");
+    this.load.audio("sfx_click", "assets/sounds/sfx/click.mp3");
 
     // Músicas de fundo dos mapas.
-    this.load.audio("beach_music", "assets/sounds/beachMap.mp3");
-    this.load.audio("cielo_music", "assets/sounds/cieloMap.mp3");
-    this.load.audio("city_music", "assets/sounds/cityMap.mp3");
-    this.load.audio("industrial_music", "assets/sounds/industryMap.mp3");
-    this.load.audio("farm_music", "assets/sounds/cieloMap.mp3"); // Utilizando modelo semelhante para a fazenda
+    this.load.audio("beach_music", "assets/sounds/themes/beachMap.mp3");
+    this.load.audio("cielo_music", "assets/sounds/themes/cieloMap.mp3");
+    this.load.audio("city_music", "assets/sounds/themes/cityMap.mp3");
+    this.load.audio("industrial_music", "assets/sounds/themes/industryMap.mp3");
+    this.load.audio("farm_music", "assets/sounds/themes/farmMap.mp3");
 
     // Spritesheets de corrida e idle de cada personagem (frames de 16x32px).
     const characters = ["alan", "amanda", "amelia", "thiago", "ingrid"];
@@ -263,6 +269,25 @@ export class PreloadScene extends Phaser.Scene {
         frameHeight: 32,
       });
       this.load.spritesheet(`${char}-idle`, `assets/players/${char}_idle.png`, {
+        frameWidth: 16,
+        frameHeight: 32,
+      });
+    });
+
+    // Spritesheets dos NPCs
+    const npcs = [
+      "npc4",
+      "npc_praia",
+      "npc_praia2",
+      "npc_praia3",
+      "npc_fazenda",
+      "npc_fazenda2",
+      "npc_fazenda3",
+      "npc_industrial",
+      "npc_industrial2",
+    ];
+    npcs.forEach((npc) => {
+      this.load.spritesheet(`${npc}-idle`, `assets/npcs/${npc}.png`, {
         frameWidth: 16,
         frameHeight: 32,
       });

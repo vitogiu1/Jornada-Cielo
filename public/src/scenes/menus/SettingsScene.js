@@ -7,6 +7,7 @@
  */
 
 import Phaser from "phaser";
+import { ColorBlind } from "../../utils/ColorBlind";
 
 /**
  * Cena de configurações com sliders interativos de volume.
@@ -25,8 +26,12 @@ export class SettingsScene extends Phaser.Scene {
   init(data) {
     this.returnScene = data?.returnScene || "MenuScene";
 
-    // Lê valores salvos no registry (preservados entre cenas). Padrão é 30%.
+    // Lê valores salvos no registry (preservados entre cenas). Padrão é 30% e 70%.
     this.musicVolume = this.registry.get("musicVolume") ?? 0.3;
+    this.sfxVolume = this.registry.get("sfxVolume") ?? 0.7;
+    
+    // Lê e prepara o filtro de daltonismo
+    this.daltonismFilter = localStorage.getItem("daltonismFilter") || "none";
 
     // Estado do drag dos sliders.
     this._dragging = null;
@@ -99,7 +104,7 @@ export class SettingsScene extends Phaser.Scene {
   /** Constrói o painel central glassmorphism com os controles. */
   _buildCard(w, h, cx) {
     const cardW = Math.min(w - 80, 520);
-    const cardH = 180;
+    const cardH = 260; // Aumentado para acomodar o filtro de cores
     const cardX = cx - cardW / 2;
     const cardY = h * 0.25;
 
@@ -114,7 +119,7 @@ export class SettingsScene extends Phaser.Scene {
     const sliderX = cardX + 40;
 
     // Slider de Música.
-    const musicY = cardY + 70;
+    const musicY = cardY + 40;
     this._buildSliderRow(
       cx,
       sliderX,
@@ -129,9 +134,52 @@ export class SettingsScene extends Phaser.Scene {
       },
       "musicSlider",
     );
+
+    // Slider de SFX.
+    const sfxY = cardY + 110;
+    this._buildSliderRow(
+      cx,
+      sliderX,
+      sfxY,
+      sliderW,
+      "🔊  Efeitos",
+      this.sfxVolume,
+      (val) => {
+        this.sfxVolume = val;
+        this.registry.set("sfxVolume", val);
+        this._applySfxVolume(val);
+      },
+      "sfxSlider",
+    );
+
+    // Seletor de Daltonismo
+    const daltonY = cardY + 180;
+    const colorOptions = [
+      { name: "Nenhum", value: "none" },
+      { name: "Protanopia", value: "protanopia" },
+      { name: "Deuteranopia", value: "deuteranopia" },
+      { name: "Tritanopia", value: "tritanopia" },
+      { name: "Monocromático", value: "achromatopsia" }
+    ];
+    const initialIndex = colorOptions.findIndex(o => o.value === this.daltonismFilter) || 0;
+
+    this._buildCycleRow(
+      cx,
+      sliderX,
+      daltonY,
+      sliderW,
+      "👁  Filtro de Cor",
+      colorOptions,
+      Math.max(0, initialIndex),
+      (val) => {
+        this.daltonismFilter = val;
+        localStorage.setItem("daltonismFilter", val);
+        ColorBlind.applyFilter(val);
+      }
+    );
   }
 
-  // ── SLIDER ──
+  // ── CONTROLES ──
 
   /**
    * Constrói uma linha completa com label, slider e valor percentual.
@@ -250,6 +298,68 @@ export class SettingsScene extends Phaser.Scene {
     });
   }
 
+  /**
+   * Constrói uma linha com seletor setado (ciclo) para opções textuais.
+   * @param {number} cx - Centro
+   * @param {number} x - Início esquerdo
+   * @param {number} y - Posição Y 
+   * @param {number} width - Largura efetiva
+   * @param {string} label - Descrição à esquerda
+   * @param {Array} options - Opções [{name, value}]
+   * @param {number} initialIndex - Opção iniciada
+   * @param {Function} onChange - Disparado na alteração do valor
+   */
+  _buildCycleRow(cx, x, y, width, label, options, initialIndex, onChange) {
+    this.add.text(x, y, label, {
+      fontFamily: "monospace",
+      fontSize: "15px",
+      color: "#aaccff",
+    }).setOrigin(0, 0.5);
+
+    let currentIndex = initialIndex;
+
+    const controlCenterX = x + width - 90;
+
+    // Label central da opção
+    const optText = this.add.text(controlCenterX, y, options[currentIndex].name, {
+      fontFamily: "monospace",
+      fontSize: "15px",
+      fontStyle: "bold",
+      color: "#ffffff"
+    }).setOrigin(0.5, 0.5);
+
+    // Botões de ciclo
+    const btnStyle = { fontSize: "20px", color: "#00adef" };
+    
+    const btnLeft = this.add.text(controlCenterX - 85, y, "◀", btnStyle)
+      .setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+    
+    const btnRight = this.add.text(controlCenterX + 85, y, "▶", btnStyle)
+      .setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+
+    [btnLeft, btnRight].forEach(b => {
+      b.on("pointerover", () => b.setColor("#ffffff"));
+      b.on("pointerout", () => b.setColor("#00adef"));
+    });
+
+    const updateDisplay = () => {
+      optText.setText(options[currentIndex].name);
+      onChange(options[currentIndex].value);
+    };
+
+    btnLeft.on("pointerdown", () => {
+      currentIndex--;
+      if (currentIndex < 0) currentIndex = options.length - 1;
+      updateDisplay();
+    });
+
+    btnRight.on("pointerdown", () => {
+      currentIndex++;
+      if (currentIndex >= options.length) currentIndex = 0;
+      updateDisplay();
+    });
+  }
+
   // ── BOTÃO FECHAR ──
 
   /** Constrói o botão de voltar. */
@@ -325,6 +435,20 @@ export class SettingsScene extends Phaser.Scene {
       "music_negotiation",
     ];
     musicKeys.forEach((key) => {
+      const snd = this.sound.get(key);
+      if (snd) snd.setVolume(val);
+    });
+  }
+
+  /**
+   * Aplica o volume de efeitos sonoros a todos os sons sfx ativos (se houver).
+   * @param {number} val - Volume normalizado (0..1).
+   */
+  _applySfxVolume(val) {
+    const sfxKeys = [
+      "sfx_levelup",
+    ];
+    sfxKeys.forEach((key) => {
       const snd = this.sound.get(key);
       if (snd) snd.setVolume(val);
     });

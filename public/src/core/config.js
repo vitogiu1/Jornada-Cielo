@@ -19,5 +19,5 @@ export const GameConfig = {
   framesPerRow: 6,
   playerSpeed: 150,
   cameraZoom: 2.5,
-  devMode: false,
+  devMode: true,
 };

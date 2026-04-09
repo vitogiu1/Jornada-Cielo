@@ -7,8 +7,8 @@
 export const hqNegotiations = {
   alan_cielo_1: {
     id: "alan_cielo_1",
-    enemyName: "Alan (Comerciante)",
-    enemyKey: "alan",
+    enemyName: "Lojista 0",
+    enemyKey: "npc4",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -89,8 +89,8 @@ export const hqNegotiations = {
   },
   amelia_cielo_1: {
     id: "amelia_cielo_1",
-    enemyName: "Amélia (Serviços Gerais)",
-    enemyKey: "amelia",
+    enemyName: "Lojista 1",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 150,
     playerMaxConfidence: 100,
     introText:
@@ -180,8 +180,8 @@ export const hqNegotiations = {
   },
   ingrid_cielo_1: {
     id: "ingrid_cielo_1",
-    enemyName: "Ingrid (Industrial)",
-    enemyKey: "ingrid",
+    enemyName: "Lojista 2",
+    enemyKey: "npc_praia2",
     enemyMaxResistance: 180,
     playerMaxConfidence: 100,
     introText:
@@ -272,8 +272,8 @@ export const hqNegotiations = {
 export const cityNegotiations = {
   thiago_city_1: {
     id: "thiago_city_1",
-    enemyName: "Thiago (Ambulante)",
-    enemyKey: "thiago",
+    enemyName: "Lojista 3",
+    enemyKey: "npc_praia3",
     enemyMaxResistance: 110,
     playerMaxConfidence: 100,
     introText:
@@ -348,8 +348,8 @@ export const cityNegotiations = {
   },
   estacionamento_city_1: {
     id: "estacionamento_city_1",
-    enemyName: "Valet Thiago",
-    enemyKey: "thiago",
+    enemyName: "Valet Marcos",
+    enemyKey: "npc4",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -418,8 +418,8 @@ export const cityNegotiations = {
   },
   sorveteria_city_1: {
     id: "sorveteria_city_1",
-    enemyName: "Amélia (Sorveteria)",
-    enemyKey: "amelia",
+    enemyName: "Sorveteiro Marcos",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 110,
     playerMaxConfidence: 100,
     introText:
@@ -488,8 +488,8 @@ export const cityNegotiations = {
   },
   museu_city_1: {
     id: "museu_city_1",
-    enemyName: "Curador Alan",
-    enemyKey: "alan",
+    enemyName: "Curador Otávio",
+    enemyKey: "npc_praia2",
     enemyMaxResistance: 130,
     playerMaxConfidence: 100,
     introText:
@@ -560,8 +560,8 @@ export const cityNegotiations = {
   },
   teatro_city_1: {
     id: "teatro_city_1",
-    enemyName: "Atriz Amanda",
-    enemyKey: "amanda",
+    enemyName: "Ator João",
+    enemyKey: "npc_praia3",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
@@ -630,8 +630,8 @@ export const cityNegotiations = {
   },
   floricultura_city_1: {
     id: "floricultura_city_1",
-    enemyName: "Florista Ingrid",
-    enemyKey: "ingrid",
+    enemyName: "Florista Rosa",
+    enemyKey: "npc4",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -701,8 +701,8 @@ export const cityNegotiations = {
   },
   chaveiro_city_1: {
     id: "chaveiro_city_1",
-    enemyName: "Chaveiro Carlos",
-    enemyKey: "thiago",
+    enemyName: "Chaveiro Beto",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 110,
     playerMaxConfidence: 100,
     introText:
@@ -777,8 +777,8 @@ export const cityNegotiations = {
 export const farmNegotiations = {
   amanda_farm_1: {
     id: "amanda_farm_1",
-    enemyName: "Amanda (Feira Orgânica)",
-    enemyKey: "amanda",
+    enemyName: "Lojista 4",
+    enemyKey: "npc4",
     enemyMaxResistance: 130,
     playerMaxConfidence: 100,
     introText:
@@ -847,8 +847,8 @@ export const farmNegotiations = {
   },
   bar_farm_1: {
     id: "bar_farm_1",
-    enemyName: "Felipe do Bar",
-    enemyKey: "alan",
+    enemyName: "Barman Zeca",
+    enemyKey: "npc_fazenda",
     enemyMaxResistance: 130,
     playerMaxConfidence: 100,
     introText:
@@ -918,8 +918,8 @@ export const farmNegotiations = {
   },
   loja_farm_1: {
     id: "loja_farm_1",
-    enemyName: "Lojista Amélia",
-    enemyKey: "amelia",
+    enemyName: "Lojista Silvio",
+    enemyKey: "npc_fazenda2",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -988,8 +988,8 @@ export const farmNegotiations = {
   },
   casa1_farm_1: {
     id: "casa1_farm_1",
-    enemyName: "Morador Thiago",
-    enemyKey: "thiago",
+    enemyName: "Morador Juca",
+    enemyKey: "npc_fazenda3",
     enemyMaxResistance: 100,
     playerMaxConfidence: 100,
     introText:
@@ -1060,8 +1060,8 @@ export const farmNegotiations = {
   },
   casa2_farm_1: {
     id: "casa2_farm_1",
-    enemyName: "Artesã Amanda",
-    enemyKey: "amanda",
+    enemyName: "Artesão André",
+    enemyKey: "npc_fazenda",
     enemyMaxResistance: 110,
     playerMaxConfidence: 100,
     introText:
@@ -1131,8 +1131,8 @@ export const farmNegotiations = {
   },
   celeiro_farm_1: {
     id: "celeiro_farm_1",
-    enemyName: "Fazendeiro Alan",
-    enemyKey: "alan",
+    enemyName: "Fazendeiro Tonho",
+    enemyKey: "npc_fazenda2",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
@@ -1205,8 +1205,8 @@ export const farmNegotiations = {
 export const beachNegotiations = {
   carlos_praia_1: {
     id: "carlos_praia_1",
-    enemyName: "Carlos (Dono do Quiosque)",
-    enemyKey: "thiago",
+    enemyName: "Banhista Dudu",
+    enemyKey: "npc_praia3",
     enemySprite: "enemy-carlos",
     enemyMaxResistance: 150,
     playerMaxConfidence: 100,
@@ -1285,8 +1285,8 @@ export const beachNegotiations = {
   },
   carlos_praia_2: {
     id: "carlos_praia_2",
-    enemyName: "Marina (Artesã da Praia)",
-    enemyKey: "amelia",
+    enemyName: "Artesão Moisés",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
@@ -1355,8 +1355,8 @@ export const beachNegotiations = {
   },
   quiosque2_beach_1: {
     id: "quiosque2_beach_1",
-    enemyName: "Thiago dos Petiscos",
-    enemyKey: "thiago",
+    enemyName: "Cozinheiro Léo",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
@@ -1428,8 +1428,8 @@ export const beachNegotiations = {
   },
   quiossurf_beach_1: {
     id: "quiossurf_beach_1",
-    enemyName: "Instrutor Alan",
-    enemyKey: "alan",
+    enemyName: "Instrutor Vitor",
+    enemyKey: "npc_praia2",
     enemyMaxResistance: 130,
     playerMaxConfidence: 100,
     introText:
@@ -1499,8 +1499,8 @@ export const beachNegotiations = {
   },
   quiosque3_beach_1: {
     id: "quiosque3_beach_1",
-    enemyName: "Amélia do Açaí",
-    enemyKey: "amelia",
+    enemyName: "Vendedor Carlos",
+    enemyKey: "npc_praia3",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -1574,8 +1574,8 @@ export const beachNegotiations = {
 export const industrialNegotiations = {
   ingrid_industrial_2: {
     id: "ingrid_industrial_2",
-    enemyName: "Roberto (Logística)",
-    enemyKey: "alan",
+    enemyName: "Lojista 5",
+    enemyKey: "npc_praia",
     enemyMaxResistance: 160,
     playerMaxConfidence: 100,
     introText:
@@ -1646,8 +1646,8 @@ export const industrialNegotiations = {
   },
   mecanica_ind_1: {
     id: "mecanica_ind_1",
-    enemyName: "Mecânico Thiago",
-    enemyKey: "thiago",
+    enemyName: "Mecânico César",
+    enemyKey: "npc_industrial",
     enemyMaxResistance: 150,
     playerMaxConfidence: 100,
     introText:
@@ -1717,8 +1717,8 @@ export const industrialNegotiations = {
   },
   centromotor_ind_1: {
     id: "centromotor_ind_1",
-    enemyName: "Supervisora Ingrid",
-    enemyKey: "ingrid",
+    enemyName: "Supervisor José",
+    enemyKey: "npc_industrial2",
     enemyMaxResistance: 160,
     playerMaxConfidence: 100,
     introText:
@@ -1790,8 +1790,8 @@ export const industrialNegotiations = {
   },
   centrosuprimento_ind_1: {
     id: "centrosuprimento_ind_1",
-    enemyName: "Fornecedor Alan",
-    enemyKey: "alan",
+    enemyName: "Fornecedor Fábio",
+    enemyKey: "npc_industrial",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
@@ -1860,8 +1860,8 @@ export const industrialNegotiations = {
   },
   centrodepecas_ind_1: {
     id: "centrodepecas_ind_1",
-    enemyName: "Estoquista Amanda",
-    enemyKey: "amanda",
+    enemyName: "Estoquista Paulo",
+    enemyKey: "npc_industrial2",
     enemyMaxResistance: 130,
     playerMaxConfidence: 100,
     introText:
@@ -1932,8 +1932,8 @@ export const industrialNegotiations = {
   },
   galpaomergulho_ind_1: {
     id: "galpaomergulho_ind_1",
-    enemyName: "Roberto da Logística",
-    enemyKey: "alan",
+    enemyName: "Gerente Denis",
+    enemyKey: "npc_industrial",
     enemyMaxResistance: 150,
     playerMaxConfidence: 100,
     introText:
@@ -2005,8 +2005,8 @@ export const industrialNegotiations = {
   },
   secaohidraulica_ind_1: {
     id: "secaohidraulica_ind_1",
-    enemyName: "Técnica Amélia",
-    enemyKey: "amelia",
+    enemyName: "Técnico Laerte",
+    enemyKey: "npc_industrial2",
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:

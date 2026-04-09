@@ -111,8 +111,7 @@ export class PlayerHudScene extends Phaser.Scene {
     const textStartX = avatarX + avatarRadius + 15;
 
     // Nome do personagem.
-    const nameStr =
-      this.characterKey.charAt(0).toUpperCase() + this.characterKey.slice(1);
+    const nameStr = this.registry.get("playerName") || "Jogador";
     const rightSideCentX = textStartX + (bgWidth - textStartX) / 2;
 
     // Texto com o nome do personagem
