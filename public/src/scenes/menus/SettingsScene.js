@@ -2,7 +2,7 @@
  * @fileoverview Tela de Configurações do Jogo.
  * Permite ajustar o volume global da música
  * por meio de sliders interativos que afetam todos os sons em tempo real.
- * O design dessa cena foi feito com IA.
+ * O design segue o padrão Glassmorphism da interface principal.
  * @module scenes/menus/SettingsScene
  */
 
@@ -29,7 +29,7 @@ export class SettingsScene extends Phaser.Scene {
     // Lê valores salvos no registry (preservados entre cenas). Padrão é 30% e 70%.
     this.musicVolume = this.registry.get("musicVolume") ?? 0.3;
     this.sfxVolume = this.registry.get("sfxVolume") ?? 0.7;
-    
+
     // Lê e prepara o filtro de daltonismo
     this.daltonismFilter = localStorage.getItem("daltonismFilter") || "none";
 
@@ -41,15 +41,25 @@ export class SettingsScene extends Phaser.Scene {
     this.scene.bringToTop();
     const { width: w, height: h } = this.scale;
     const cx = w / 2;
+    const isMobile = !this.sys.game.device.os.desktop;
 
     this._buildBackground(w, h, cx);
-    this._buildTitle(cx, h);
-    this._buildCard(w, h, cx);
-    this._buildCloseButton(w, h);
+    this._buildTopBackButton(isMobile);
+    this._buildTitle(cx, h, isMobile);
+    this._buildCard(w, h, cx, isMobile);
     this._setupKeyboard();
+
+    // Nota de rodapé suave
+    this.add
+      .text(cx, h * 0.95, "As configurações são salvas automaticamente", {
+        fontFamily: "Arial, sans-serif",
+        fontSize: "12px",
+        color: "#556677",
+      })
+      .setOrigin(0.5);
   }
 
-  // ── FUNDO ──
+  // ── FUNDO E BOTÃO VOLTAR ──
 
   /** Cria o fundo escuro com partículas decorativas. */
   _buildBackground(w, h, cx) {
@@ -60,66 +70,96 @@ export class SettingsScene extends Phaser.Scene {
 
     // Círculos brilhantes decorativos (efeito glow).
     const glowGfx = this.add.graphics();
-    glowGfx.fillStyle(0x0055ff, 0.06);
-    glowGfx.fillCircle(cx * 0.3, h * 0.2, 180);
-    glowGfx.fillStyle(0x00aaff, 0.05);
-    glowGfx.fillCircle(cx * 1.7, h * 0.8, 220);
+    glowGfx.fillStyle(0x0055ff, 0.05);
+    glowGfx.fillCircle(cx * 0.2, h * 0.2, 180);
+    glowGfx.fillStyle(0x00aaff, 0.04);
+    glowGfx.fillCircle(cx * 1.8, h * 0.8, 220);
+  }
 
-    // Linha decorativa no topo.
-    const lineGfx = this.add.graphics();
-    lineGfx.lineStyle(1, 0x00adef, 0.3);
-    lineGfx.lineBetween(60, 72, w - 60, 72);
+  /** Constrói o botão de voltar padrão no topo esquerdo. */
+  _buildTopBackButton(isMobile) {
+    const backBtnX = isMobile ? 60 : 80;
+    const backBtnY = isMobile ? 40 : 50;
+    const backBtnW = 100;
+    const backBtnH = 40;
+
+    const backGfx = this.add.graphics();
+    backGfx.fillStyle(0xffffff, 0.1);
+    backGfx.fillRoundedRect(
+      backBtnX - backBtnW / 2,
+      backBtnY - backBtnH / 2,
+      backBtnW,
+      backBtnH,
+      12,
+    );
+    backGfx.lineStyle(2, 0xffffff, 0.4);
+    backGfx.strokeRoundedRect(
+      backBtnX - backBtnW / 2,
+      backBtnY - backBtnH / 2,
+      backBtnW,
+      backBtnH,
+      12,
+    );
+
+    this.add
+      .text(backBtnX, backBtnY, "❮ VOLTAR", {
+        fontFamily: "Arial, sans-serif",
+        fontSize: "14px",
+        fontStyle: "bold",
+        color: "#ffffff",
+        letterSpacing: 1,
+      })
+      .setOrigin(0.5);
+
+    const backHitZone = this.add
+      .rectangle(backBtnX, backBtnY, backBtnW, backBtnH, 0x000000, 0)
+      .setInteractive({ useHandCursor: true });
+
+    backHitZone.on("pointerover", () => backGfx.setAlpha(0.6));
+    backHitZone.on("pointerout", () => backGfx.setAlpha(1));
+    backHitZone.on("pointerdown", () => this._goBack());
   }
 
   // ── TÍTULO ──
 
-  /** Constrói o cabeçalho com ícone e título. */
-  _buildTitle(cx, h) {
-    // Ícone de engrenagem (⚙).
-    this.add
-      .text(cx, h * 0.1, "⚙", {
-        fontSize: "36px",
-        color: "#00adef",
-      })
-      .setOrigin(0.5);
+  /** Constrói o cabeçalho. */
+  _buildTitle(cx, h, isMobile) {
+    const titleSize = isMobile ? "28px" : "38px";
 
+    // Título Principal
     this.add
-      .text(cx, h * 0.1 + 46, "CONFIGURAÇÕES", {
+      .text(cx, h * 0.15, "CONFIGURAÇÕES", {
         fontFamily: "monospace",
-        fontSize: "26px",
+        fontSize: titleSize,
         fontStyle: "bold",
         color: "#ffffff",
-        letterSpacing: 6,
+        letterSpacing: 4,
       })
-      .setOrigin(0.5);
-
-    // Linha divisória abaixo do título.
-    const divGfx = this.add.graphics();
-    divGfx.lineStyle(1, 0x00adef, 0.5);
-    divGfx.lineBetween(cx - 140, h * 0.1 + 70, cx + 140, h * 0.1 + 70);
+      .setOrigin(0.5)
+      .setShadow(0, 0, "rgba(0, 173, 239, 0.6)", 15, true, false);
   }
 
   // ── CARD PRINCIPAL ──
 
   /** Constrói o painel central glassmorphism com os controles. */
-  _buildCard(w, h, cx) {
-    const cardW = Math.min(w - 80, 520);
-    const cardH = 260; // Aumentado para acomodar o filtro de cores
+  _buildCard(w, h, cx, isMobile) {
+    const cardW = isMobile ? w * 0.85 : Math.min(w - 80, 520);
+    const cardH = 260;
     const cardX = cx - cardW / 2;
-    const cardY = h * 0.25;
+    const cardY = h * 0.45 - cardH / 2; // Centralizado verticalmente considerando o título
 
-    // Fundo do card.
+    // Fundo do card (Glassmorphism).
     const cardGfx = this.add.graphics();
     cardGfx.fillStyle(0xffffff, 0.04);
-    cardGfx.fillRoundedRect(cardX, cardY, cardW, cardH, 18);
-    cardGfx.lineStyle(1, 0x00adef, 0.25);
-    cardGfx.strokeRoundedRect(cardX, cardY, cardW, cardH, 18);
+    cardGfx.fillRoundedRect(cardX, cardY, cardW, cardH, 20);
+    cardGfx.lineStyle(2, 0x00adef, 0.3);
+    cardGfx.strokeRoundedRect(cardX, cardY, cardW, cardH, 20);
 
     const sliderW = cardW - 80;
     const sliderX = cardX + 40;
 
     // Slider de Música.
-    const musicY = cardY + 40;
+    const musicY = cardY + 50;
     this._buildSliderRow(
       cx,
       sliderX,
@@ -136,7 +176,7 @@ export class SettingsScene extends Phaser.Scene {
     );
 
     // Slider de SFX.
-    const sfxY = cardY + 110;
+    const sfxY = cardY + 130;
     this._buildSliderRow(
       cx,
       sliderX,
@@ -153,15 +193,16 @@ export class SettingsScene extends Phaser.Scene {
     );
 
     // Seletor de Daltonismo
-    const daltonY = cardY + 180;
+    const daltonY = cardY + 210;
     const colorOptions = [
       { name: "Nenhum", value: "none" },
       { name: "Protanopia", value: "protanopia" },
       { name: "Deuteranopia", value: "deuteranopia" },
       { name: "Tritanopia", value: "tritanopia" },
-      { name: "Monocromático", value: "achromatopsia" }
+      { name: "Monocromático", value: "achromatopsia" },
     ];
-    const initialIndex = colorOptions.findIndex(o => o.value === this.daltonismFilter) || 0;
+    const initialIndex =
+      colorOptions.findIndex((o) => o.value === this.daltonismFilter) || 0;
 
     this._buildCycleRow(
       cx,
@@ -175,7 +216,7 @@ export class SettingsScene extends Phaser.Scene {
         this.daltonismFilter = val;
         localStorage.setItem("daltonismFilter", val);
         ColorBlind.applyFilter(val);
-      }
+      },
     );
   }
 
@@ -183,26 +224,19 @@ export class SettingsScene extends Phaser.Scene {
 
   /**
    * Constrói uma linha completa com label, slider e valor percentual.
-   * @param {number} cx - Centro horizontal da tela.
-   * @param {number} x - Posição X do início do slider.
-   * @param {number} y - Posição Y central da linha.
-   * @param {number} sliderW - Largura do slider.
-   * @param {string} label - Texto do label.
-   * @param {number} initialVal - Valor inicial (0..1).
-   * @param {Function} onChange - Callback com o novo valor (0..1).
-   * @param {string} key - Chave única para referenciar este slider.
    */
   _buildSliderRow(cx, x, y, sliderW, label, initialVal, onChange, key) {
     const trackH = 6;
-    const thumbR = 11;
-    const thumbY = y + 38;
+    const thumbR = 10;
+    const thumbY = y + 34;
     const trackY = thumbY;
 
     // Label da linha.
     this.add
       .text(x, y, label, {
-        fontFamily: "monospace",
-        fontSize: "15px",
+        fontFamily: "Arial, sans-serif",
+        fontSize: "16px",
+        fontStyle: "bold",
         color: "#aaccff",
       })
       .setOrigin(0, 0.5);
@@ -211,7 +245,7 @@ export class SettingsScene extends Phaser.Scene {
     const pctText = this.add
       .text(x + sliderW, y, `${Math.round(initialVal * 100)}%`, {
         fontFamily: "monospace",
-        fontSize: "15px",
+        fontSize: "16px",
         fontStyle: "bold",
         color: "#ffffff",
       })
@@ -222,10 +256,8 @@ export class SettingsScene extends Phaser.Scene {
     trackBg.fillStyle(0x2a2a4a, 1);
     trackBg.fillRoundedRect(x, trackY - trackH / 2, sliderW, trackH, 3);
 
-    // Track de progresso (trilha azul).
+    // Track de progresso e Thumb
     const trackFill = this.add.graphics();
-
-    // Thumb (bolinha arrastável).
     const thumb = this.add.graphics();
 
     // Função que redesenha o slider com base num valor (0..1).
@@ -244,13 +276,13 @@ export class SettingsScene extends Phaser.Scene {
 
       thumb.clear();
       // Sombra do thumb.
-      thumb.fillStyle(0x000000, 0.3);
+      thumb.fillStyle(0x000000, 0.4);
       thumb.fillCircle(thumbX + 2, thumbY + 2, thumbR);
       // Thumb principal com gradiente manual.
       thumb.fillStyle(0x00adef, 1);
       thumb.fillCircle(thumbX, thumbY, thumbR);
       thumb.fillStyle(0x55ddff, 1);
-      thumb.fillCircle(thumbX - 3, thumbY - 3, 4);
+      thumb.fillCircle(thumbX - 2, thumbY - 2, 4);
 
       pctText.setText(`${Math.round(clamp * 100)}%`);
     };
@@ -263,7 +295,7 @@ export class SettingsScene extends Phaser.Scene {
         x + sliderW / 2,
         thumbY,
         sliderW + thumbR * 2,
-        thumbR * 3,
+        thumbR * 4,
         0x000000,
         0,
       )
@@ -299,47 +331,60 @@ export class SettingsScene extends Phaser.Scene {
   }
 
   /**
-   * Constrói uma linha com seletor setado (ciclo) para opções textuais.
-   * @param {number} cx - Centro
-   * @param {number} x - Início esquerdo
-   * @param {number} y - Posição Y 
-   * @param {number} width - Largura efetiva
-   * @param {string} label - Descrição à esquerda
-   * @param {Array} options - Opções [{name, value}]
-   * @param {number} initialIndex - Opção iniciada
-   * @param {Function} onChange - Disparado na alteração do valor
+   * Constrói uma linha com seletor de ciclo para opções textuais.
    */
   _buildCycleRow(cx, x, y, width, label, options, initialIndex, onChange) {
-    this.add.text(x, y, label, {
-      fontFamily: "monospace",
-      fontSize: "15px",
-      color: "#aaccff",
-    }).setOrigin(0, 0.5);
+    this.add
+      .text(x, y, label, {
+        fontFamily: "Arial, sans-serif",
+        fontSize: "16px",
+        fontStyle: "bold",
+        color: "#aaccff",
+      })
+      .setOrigin(0, 0.5);
 
     let currentIndex = initialIndex;
+    const controlCenterX = x + width - 95;
 
-    const controlCenterX = x + width - 90;
+    // Fundo do seletor visual
+    const selectBg = this.add.graphics();
+    selectBg.fillStyle(0x1a1a2e, 0.8);
+    selectBg.fillRoundedRect(controlCenterX - 75, y - 16, 150, 32, 6);
+    selectBg.lineStyle(1, 0x00adef, 0.4);
+    selectBg.strokeRoundedRect(controlCenterX - 75, y - 16, 150, 32, 6);
 
     // Label central da opção
-    const optText = this.add.text(controlCenterX, y, options[currentIndex].name, {
-      fontFamily: "monospace",
-      fontSize: "15px",
-      fontStyle: "bold",
-      color: "#ffffff"
-    }).setOrigin(0.5, 0.5);
+    const optText = this.add
+      .text(controlCenterX, y, options[currentIndex].name, {
+        fontFamily: "monospace",
+        fontSize: "14px",
+        fontStyle: "bold",
+        color: "#ffffff",
+      })
+      .setOrigin(0.5, 0.5);
 
     // Botões de ciclo
-    const btnStyle = { fontSize: "20px", color: "#00adef" };
-    
-    const btnLeft = this.add.text(controlCenterX - 85, y, "◀", btnStyle)
-      .setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
-    
-    const btnRight = this.add.text(controlCenterX + 85, y, "▶", btnStyle)
-      .setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+    const btnStyle = { fontSize: "18px", color: "#00adef" };
 
-    [btnLeft, btnRight].forEach(b => {
-      b.on("pointerover", () => b.setColor("#ffffff"));
-      b.on("pointerout", () => b.setColor("#00adef"));
+    const btnLeft = this.add
+      .text(controlCenterX - 60, y, "◀", btnStyle)
+      .setOrigin(0.5, 0.5)
+      .setInteractive({ useHandCursor: true });
+
+    const btnRight = this.add
+      .text(controlCenterX + 60, y, "▶", btnStyle)
+      .setOrigin(0.5, 0.5)
+      .setInteractive({ useHandCursor: true });
+
+    [btnLeft, btnRight].forEach((b) => {
+      b.on("pointerover", () => {
+        b.setColor("#ffffff");
+        b.setScale(1.2);
+      });
+      b.on("pointerout", () => {
+        b.setColor("#00adef");
+        b.setScale(1);
+      });
     });
 
     const updateDisplay = () => {
@@ -358,49 +403,6 @@ export class SettingsScene extends Phaser.Scene {
       if (currentIndex >= options.length) currentIndex = 0;
       updateDisplay();
     });
-  }
-
-  // ── BOTÃO FECHAR ──
-
-  /** Constrói o botão de voltar. */
-  _buildCloseButton(w, h) {
-    const cx = w / 2;
-    const btnY = h * 0.87;
-
-    // Fundo do botão.
-    const btnGfx = this.add.graphics();
-    const btnW = 220;
-    const btnH = 48;
-    btnGfx.fillStyle(0x0033aa, 0.7);
-    btnGfx.fillRoundedRect(cx - btnW / 2, btnY - btnH / 2, btnW, btnH, 10);
-    btnGfx.lineStyle(1.5, 0x00adef, 0.8);
-    btnGfx.strokeRoundedRect(cx - btnW / 2, btnY - btnH / 2, btnW, btnH, 10);
-
-    const btnText = this.add
-      .text(cx, btnY, "← VOLTAR", {
-        fontFamily: "monospace",
-        fontSize: "16px",
-        fontStyle: "bold",
-        color: "#ffffff",
-        letterSpacing: 3,
-      })
-      .setOrigin(0.5);
-
-    // Zona clicável.
-    const hitZone = this.add
-      .rectangle(cx, btnY, btnW, btnH, 0x000000, 0)
-      .setInteractive({ useHandCursor: true });
-
-    hitZone.on("pointerdown", () => this._goBack());
-
-    // Nota de rodapé.
-    this.add
-      .text(w / 2, h * 0.95, "As configurações são salvas automaticamente", {
-        fontFamily: "monospace",
-        fontSize: "11px",
-        color: "#445566",
-      })
-      .setOrigin(0.5);
   }
 
   // ── TECLADO ──
@@ -422,7 +424,6 @@ export class SettingsScene extends Phaser.Scene {
 
   /**
    * Aplica o volume de música a todos os sons de mapa/menu ativos.
-   * @param {number} val - Volume normalizado (0..1).
    */
   _applyMusicVolume(val) {
     const musicKeys = [
@@ -442,12 +443,9 @@ export class SettingsScene extends Phaser.Scene {
 
   /**
    * Aplica o volume de efeitos sonoros a todos os sons sfx ativos (se houver).
-   * @param {number} val - Volume normalizado (0..1).
    */
   _applySfxVolume(val) {
-    const sfxKeys = [
-      "sfx_levelup",
-    ];
+    const sfxKeys = ["sfx_levelup"];
     sfxKeys.forEach((key) => {
       const snd = this.sound.get(key);
       if (snd) snd.setVolume(val);
@@ -464,7 +462,15 @@ export class SettingsScene extends Phaser.Scene {
     } else if (this.scene.isActive(this.returnScene)) {
       this.scene.stop();
     } else {
-      this.scene.start(this.returnScene);
+      // Se voltando para o Menu principal, dá um fade suave (opcional para polimento)
+      if (this.returnScene === "MenuScene") {
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.cameras.main.once("camerafadeoutcomplete", () => {
+          this.scene.start(this.returnScene);
+        });
+      } else {
+        this.scene.start(this.returnScene);
+      }
     }
   }
 }

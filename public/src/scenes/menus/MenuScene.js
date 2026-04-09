@@ -21,38 +21,43 @@ export class MenuScene extends Phaser.Scene {
     // detecta mobile para ajustar layout.
     const isMobile = !this.sys.game.device.os.desktop;
 
-    // fundo de tela.
-    const bg = this.add.image(width / 2, height / 2, "menu_bg");
-    const scale = Math.max(width / bg.width, height / bg.height);
-    bg.setScale(scale).setScrollFactor(0).setDepth(-2);
+    // Gradiente escuro de fundo.
+    const bgGfx = this.add.graphics();
+    bgGfx.fillGradientStyle(0x0a0a1a, 0x0a0a1a, 0x0d1a2e, 0x0d1a2e, 0.92);
+    bgGfx.fillRect(0, 0, width, height);
 
-    // camada escura para dar contraste.
-    this.add.rectangle(0, 0, width, height, 0x000000, 0.2).setOrigin(0);
+    // Círculos brilhantes decorativos (efeito glow).
+    const glowGfx = this.add.graphics();
+    glowGfx.fillStyle(0x0055ff, 0.06);
+    glowGfx.fillCircle(width * 0.3, height * 0.2, 180);
+    glowGfx.fillStyle(0x00aaff, 0.05);
+    glowGfx.fillCircle(width * 1.7, height * 0.8, 220);
 
     // titulo adaptativo para desktop e mobile.
-    const titleSize = isMobile ? "48px" : "80px";
+    const titleSize = isMobile ? "48px" : "64px";
     const titleY = height * 0.35;
 
     const title = this.add
       .text(width / 2, titleY, "JORNADA CIELO", {
         fontSize: titleSize,
-        fontFamily: "Arial",
+        fontFamily: "monospace",
         fontStyle: "bold",
         color: "#ffffff",
+        letterSpacing: 8,
       })
       .setOrigin(0.5)
       .setAlpha(0)
       .setDepth(10);
 
-    title.setStroke("#ffffff", 1);
-    title.setShadow(0, 0, "rgba(255, 255, 255, 0.5)", 10, true, false);
+    title.setStroke("#00adef", 1);
+    title.setShadow(0, 0, "rgba(0, 173, 239, 0.5)", 15, true, false);
 
     // linha decorativa abaixo do titulo.
-    const lineWidth = isMobile ? 180 : 300;
+    const lineWidth = isMobile ? 220 : 400;
     const line = this.add
       .rectangle(
         width / 2,
-        titleY + (isMobile ? 35 : 60),
+        titleY + (isMobile ? 35 : 55),
         lineWidth,
         2,
         0x00adef,
@@ -79,17 +84,6 @@ export class MenuScene extends Phaser.Scene {
       },
     });
 
-    // botoes de navegacao.
-    const btnWidth = isMobile ? width * 0.8 : 350;
-    const buttonStyle = {
-      fontSize: isMobile ? "24px" : "32px",
-      fontFamily: "Arial",
-      color: "#ffffff",
-      align: "center",
-      fixedWidth: btnWidth,
-      padding: { x: 0, y: 15 },
-    };
-
     const mapScenes = [
       "CityScene",
       "CieloScene",
@@ -100,81 +94,98 @@ export class MenuScene extends Phaser.Scene {
     const pausedSceneKey = mapScenes.find((key) => this.scene.isPaused(key));
 
     const buttonYStart = height * 0.6;
-    const buttonSpacing = isMobile ? 70 : 90;
+    const buttonSpacing = isMobile ? 70 : 80;
+
+    const createButton = (x, y, text, color, onClick) => {
+      const btnW = isMobile ? width * 0.8 : 320;
+      const btnH = 50;
+      const colorNum = parseInt(color.replace("#", "0x"), 16);
+
+      const btnGfx = this.add.graphics();
+      const drawBtn = (isHover) => {
+        btnGfx.clear();
+        btnGfx.fillStyle(colorNum, isHover ? 0.9 : 0.7);
+        btnGfx.fillRoundedRect(x - btnW / 2, y - btnH / 2, btnW, btnH, 12);
+        btnGfx.lineStyle(1.5, 0x00adef, isHover ? 1 : 0.5);
+        btnGfx.strokeRoundedRect(x - btnW / 2, y - btnH / 2, btnW, btnH, 12);
+      };
+
+      drawBtn(false);
+
+      const hitZone = this.add
+        .rectangle(x, y, btnW, btnH, 0x000000, 0)
+        .setInteractive({ useHandCursor: true });
+
+      const btnText = this.add
+        .text(x, y, text, {
+          fontFamily: "monospace",
+          fontSize: "20px",
+          fontStyle: "bold",
+          color: "#ffffff",
+          letterSpacing: 3,
+        })
+        .setOrigin(0.5);
+
+      hitZone.on("pointerover", () => {
+        drawBtn(true);
+        this.tweens.add({ targets: btnText, scale: 1.05, duration: 200 });
+      });
+      hitZone.on("pointerout", () => {
+        drawBtn(false);
+        this.tweens.add({ targets: btnText, scale: 1, duration: 200 });
+      });
+      hitZone.on("pointerdown", onClick);
+
+      // Adiciona profundidade pra ficar sobre as nuvens
+      btnGfx.setDepth(10);
+      btnText.setDepth(10);
+      hitZone.setDepth(10);
+    };
 
     if (pausedSceneKey) {
-      const retomarBtn = this.add
-        .text(width / 2, buttonYStart, "RETOMAR", {
-          ...buttonStyle,
-          backgroundColor: "#2ecc71",
-        })
-        .setOrigin(0.5)
-        .setInteractive({ useHandCursor: true })
-        .on("pointerdown", () => {
-          const sc = this.scene.get(pausedSceneKey);
-          if (sc) {
-            sc.scene.setVisible(true);
-            sc.scene.resume();
-          }
-          this.scene.stop();
-        });
+      createButton(width / 2, buttonYStart, "RETOMAR", "#2ecc71", () => {
+        const sc = this.scene.get(pausedSceneKey);
+        if (sc) {
+          sc.scene.setVisible(true);
+          sc.scene.resume();
+        }
+        this.scene.stop();
+      });
 
-      const novoJogoBtn = this.add
-        .text(width / 2, buttonYStart + buttonSpacing, "NOVO JOGO", {
-          ...buttonStyle,
-          backgroundColor: "#e67e22",
-        })
-        .setOrigin(0.5)
-        .setInteractive({ useHandCursor: true })
-        .on("pointerdown", () => {
+      createButton(
+        width / 2,
+        buttonYStart + buttonSpacing,
+        "NOVO JOGO",
+        "#e67e22",
+        () => {
           this.scene.stop(pausedSceneKey);
-          this.scene.start("NameInputScene");
-        });
+          this.scene.start("SaveSelectScene");
+        },
+      );
 
-      const settingsBtn = this.add
-        .text(width / 2, buttonYStart + buttonSpacing * 2, "CONFIGURAÇÕES", {
-          ...buttonStyle,
-          backgroundColor: "#3498db",
-        })
-        .setOrigin(0.5)
-        .setInteractive({ useHandCursor: true })
-        .on("pointerdown", () =>
-          this.scene.start("SettingsScene", { returnScene: "MenuScene" }),
-        );
-
-      [retomarBtn, novoJogoBtn, settingsBtn].forEach((btn) => {
-        btn.on("pointerover", () => btn.setAlpha(0.9));
-        btn.on("pointerout", () => btn.setAlpha(1));
-        btn.setDepth(10);
-      });
+      createButton(
+        width / 2,
+        buttonYStart + buttonSpacing * 2,
+        "CONFIGURAÇÕES",
+        "#3498db",
+        () => {
+          this.scene.start("SettingsScene", { returnScene: "MenuScene" });
+        },
+      );
     } else {
-      const playButton = this.add
-        .text(width / 2, buttonYStart, "JOGAR", {
-          ...buttonStyle,
-          backgroundColor: "#2ecc71",
-        })
-        .setOrigin(0.5)
-        .setInteractive({ useHandCursor: true })
-        .on("pointerdown", () => {
-          this.scene.start("NameInputScene");
-        });
-
-      const settingsButton = this.add
-        .text(width / 2, playButton.y + buttonSpacing, "CONFIGURAÇÕES", {
-          ...buttonStyle,
-          backgroundColor: "#3498db",
-        })
-        .setOrigin(0.5)
-        .setInteractive({ useHandCursor: true })
-        .on("pointerdown", () =>
-          this.scene.start("SettingsScene", { returnScene: "MenuScene" }),
-        );
-
-      [playButton, settingsButton].forEach((btn) => {
-        btn.on("pointerover", () => btn.setAlpha(0.9));
-        btn.on("pointerout", () => btn.setAlpha(1));
-        btn.setDepth(10);
+      createButton(width / 2, buttonYStart, "JOGAR", "#2ecc71", () => {
+        this.scene.start("SaveSelectScene");
       });
+
+      createButton(
+        width / 2,
+        buttonYStart + buttonSpacing,
+        "CONFIGURAÇÕES",
+        "#3498db",
+        () => {
+          this.scene.start("SettingsScene", { returnScene: "MenuScene" });
+        },
+      );
     }
 
     // SISTEMA DE NUVENS

@@ -57,7 +57,8 @@ export class ProgressManager {
    * @returns {boolean}
    */
   static isWorldUnlocked(worldId) {
-    const unlocked = ProgressManager.reg?.get("unlockedWorlds") || [];
+    if (!ProgressManager.reg) return worldId === "city"; // Fallback inicial
+    const unlocked = ProgressManager.reg.get("unlockedWorlds") || [];
     return unlocked.includes(worldId);
   }
 
@@ -82,10 +83,10 @@ export class ProgressManager {
     if (idx < 0 || idx >= WORLD_ORDER.length - 1) return;
 
     const nextWorldId = WORLD_ORDER[idx + 1];
-    const unlocked = ProgressManager.reg.get("unlockedWorlds") || [];
+    const unlocked = ProgressManager.reg?.get("unlockedWorlds") || [];
     if (!unlocked.includes(nextWorldId)) {
       unlocked.push(nextWorldId);
-      ProgressManager.reg.set("unlockedWorlds", [...unlocked]);
+      ProgressManager.reg?.set("unlockedWorlds", [...unlocked]);
     }
   }
 
@@ -99,6 +100,7 @@ export class ProgressManager {
    * @param {string} negotiationId - ID da negociação.
    */
   static markNegotiationComplete(worldId, negotiationId) {
+    if (!ProgressManager.reg) return;
     const negotiations = ProgressManager.reg.get("completedNegotiations") || {};
     if (!negotiations[worldId]) negotiations[worldId] = [];
     if (!negotiations[worldId].includes(negotiationId)) {

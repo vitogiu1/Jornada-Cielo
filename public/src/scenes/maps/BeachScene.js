@@ -5,6 +5,7 @@
 
 import Phaser from "phaser";
 import { Player } from "../../entities/Player";
+import { AnimationManager } from "../../managers/AnimationManager";
 import { GameConfig } from "../../core/config";
 import { NPCManager } from "../../managers/NPCManager";
 import { beachNPCs } from "../../data/npcs";
@@ -24,7 +25,8 @@ export class BeachScene extends Phaser.Scene {
 
   /** Recebe o personagem escolhido e os dados de spawn vindos de outra cena. */
   init(data) {
-    this.characterKey = data.character || "amanda";
+    this.characterKey =
+      data.character || this.registry.get("playerSprite") || "amanda";
     this.isTransitioning = false;
     this.mapY = 0;
     this.spawnFromFarm = Boolean(data.spawnFromFarm);
@@ -32,6 +34,9 @@ export class BeachScene extends Phaser.Scene {
   }
 
   create() {
+    // Persiste estado de localização
+    this.registry.set("lastScene", "BeachScene");
+    this.registry.set("lastWorldId", "beach");
     // Abre o HUD do jogador se ainda não estiver ativo.
     if (!this.scene.isActive("PlayerHudScene")) {
       this.scene.launch("PlayerHudScene", { character: this.characterKey });
@@ -132,15 +137,18 @@ export class BeachScene extends Phaser.Scene {
 
     // Escolhe o ponto de spawn conforme a cena de origem.
     const spawnX = this.spawnFromFarm
-      ? farmSpawnX
-      : this.spawnFromIndustrial
-        ? industrialSpawnX
-        : defaultSpawnX;
+        ? farmSpawnX
+        : this.spawnFromIndustrial
+          ? industrialSpawnX
+          : defaultSpawnX;
     const spawnY = this.spawnFromFarm
-      ? farmSpawnY
-      : this.spawnFromIndustrial
-        ? industrialSpawnY
-        : defaultSpawnY;
+        ? farmSpawnY
+        : this.spawnFromIndustrial
+          ? industrialSpawnY
+          : defaultSpawnY;
+
+    // Registra animações se necessário
+    AnimationManager.createAnimations(this, this.characterKey);
 
     // Cria o jogador no ponto de spawn.
     this.player = new Player(this, spawnX, spawnY, this.characterKey, {

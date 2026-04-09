@@ -349,7 +349,7 @@ export const cityNegotiations = {
   estacionamento_city_1: {
     id: "estacionamento_city_1",
     enemyName: "Valet Marcos",
-    enemyKey: "npc4",
+    enemyKey: "npc",
     enemyMaxResistance: 120,
     playerMaxConfidence: 100,
     introText:
@@ -362,23 +362,27 @@ export const cityNegotiations = {
         power: 50,
         rhetoric: {
           question:
-            "Tô achando legal a conversa... mas a mensalidade do aluguel hoje em dia pesa muito.",
+            "A teoria é linda, mas na rua o sinal de celular oscila muito. Se a máquina ficar 'pensando' sem sinal, a fila de carros trava e o pessoal começa a buzinar.",
           responses: [
             {
               textOption:
-                "Dependendo do seu teto de faturamento, podemos isentar 100% do aluguel.",
-              textPlayer: "O brilho nos olhos do cliente foi imediato!",
+                "O arquivo de um pagamento por NFC é muito leve, ele aprova em segundos mesmo se o sinal 3G ou 4G estiver fraco.",
+              textPlayer:
+                "Você acalmou o cliente com uma explicação técnica bem prática.",
+              type: "normal",
+            },
+            {
+              textOption:
+                "As maquininhas da Cielo têm chip multioperadora. Se uma rede falhar, ela busca a mais forte automaticamente.",
+              textPlayer:
+                "Você mostrou que a tecnologia não vai deixar ele na mão no meio do trânsito! O brilho nos olhos do cliente foi imediato!",
               type: "super",
             },
             {
               textOption:
-                "A Cielo TEM opções de compra definitiva, como a Cielo ZIP.",
-              textPlayer: "Uma ótima alternativa para driblar o aluguel.",
-              type: "normal",
-            },
-            {
-              textOption: "Tem que pagar pra ter qualidade, não tem jeito.",
-              textPlayer: "Você pareceu muito arrogante...",
+                "Ah, se a máquina travar é só pedir pro cliente encostar o carro e tentar de novo, né?",
+              textPlayer:
+                "O cliente bufou só de imaginar a rua inteira buzinando pra ele...",
               type: "invalid",
             },
           ],
@@ -1136,54 +1140,58 @@ export const farmNegotiations = {
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
-      "Eu vendo grandes sacas de grãos pra cooperativa, os valores são bem altos. Eu preciso de controle e segurança, não de uma maquineta básica de camelô.",
+      "A minha produção de grãos vai para compradores de outros estados e até para fora do país. É muito dinheiro viajando longe. Preciso de segurança máxima pra cobrar essa gente à distância, não de uma maquineta básica.",
     playerArguments: [
       {
-        id: "limite_alto",
-        name: "Alta Capacidade de Vendas",
-        text: "Diferente dessas maquinetas básicas, nossos limites transacionais são ajustados para o grande atacado agropecuário.",
+        id: "link_3ds",
+        name: "Link de Pagamento 3DS",
+        text: "Para essas vendas para fora, usamos o Link de Pagamento 3DS. Nele, o comprador precisa passar por uma verificação em 3 etapas para comprovar que é ele mesmo antes de aprovar. Fraude zero.",
         power: 70,
         rhetoric: {
           question:
-            "Tudo bem, a ideia é boa. Mas e o suporte? Da última vez que precisei, fiquei 3 dias parado.",
+            "Gostei dessa segurança em 3 passos para vendas de longe... Mas e se o sistema travar bem na hora do embarque da soja? Aqui na roça, como fica o suporte?",
           responses: [
             {
               textOption:
-                "A Cielo foca em troca de máquina expressa em até 24h em grandes polos.",
-              textPlayer: "Você transmite muita segurança no suporte!",
+                "Contas do agronegócio têm suporte corporativo 24/7 com linha prioritária e monitoramento de transações em tempo real.",
+              textPlayer:
+                "Você mostrou que o agronegócio não fica na fila de espera do suporte!",
               type: "super",
             },
             {
-              textOption: "O suporte melhorou muito, confia.",
-              textPlayer: "Você pareceu meio incerto...",
+              textOption:
+                "Temos atendimento rápido por telefone e WhatsApp. Se o link falhar, te ajudamos a gerar outro na mesma hora.",
+              textPlayer:
+                "Você ofereceu uma solução prática, mas menos exclusiva.",
               type: "normal",
             },
             {
               textOption:
-                "Bom, suporte a gente não controla muito quem atende, né?",
-              textPlayer: "O cliente ficou decepcionado com a sinceridade...",
+                "Bom, aí você pede pro exportador esperar o sistema voltar, né? Tecnologia é assim mesmo.",
+              textPlayer:
+                "O fazendeiro quase teve um infarto pensando na soja apodrecendo no porto...",
               type: "invalid",
             },
           ],
         },
       },
       {
+        id: "limite_alto",
+        name: "Alta Capacidade de Vendas",
+        text: "Diferente dessas maquinetas comuns, nossa plataforma é parametrizada para os limites transacionais astronômicos do grande atacado agropecuário.",
+        power: 55,
+      },
+      {
         id: "portal_cielo",
         name: "Portal Cielo",
-        text: "Você acessa um dashboard completo no seu computador para conciliar extratos de vendas de centenas de milhares de reais com total segurança bancária.",
+        text: "Você acessa um dashboard completo no seu computador para conciliar extratos dessas vendas de centenas de milhares de reais com total segurança bancária.",
         power: 60,
         requiredProduct: "cielo_gestao",
       },
       {
-        id: "link_b2b",
-        name: "Link Corporativo",
-        text: "Pra compras da cooperativa a distância, enviamos links de pagamento blindados com anti-fraude de altíssima segurança.",
-        power: 50,
-      },
-      {
         id: "fazer_pressao",
         name: "Forçar a Venda",
-        text: "Olha, bate a meta por mim, fecha logo esse negócio hoje, vai?",
+        text: "Tonho, para de enrolar. Bate a meta por mim, fecha logo esse negócio hoje, vai?",
         power: 0,
         type: "invalid",
       },
@@ -1191,12 +1199,12 @@ export const farmNegotiations = {
     items: [],
     enemyCounters: [
       {
-        text: "Mas o banco já faz isso. Qual a real vantagem de botar a Cielo no meio da cadeia agropecuária?",
-        power: 35,
+        text: "Se uma venda de meio milhão for bloqueada pelo seu antifraude sem motivo, a carga fica parada e eu tomo um prejuízo gigante.",
+        power: 45,
       },
       {
-        text: "Se uma venda de meio milhão for bloqueada pelo seu antifraude sem motivo, a semente apodrece.",
-        power: 45,
+        text: "Aqui na fazenda a internet é via satélite, oscila demais. Seu sistema pesado não vai rodar no meu computador.",
+        power: 35,
       },
     ],
   },
@@ -1360,56 +1368,60 @@ export const beachNegotiations = {
     enemyMaxResistance: 140,
     playerMaxConfidence: 100,
     introText:
-      "Na hora do rush, as contas de mesa se acumulam rapidinho. Quero ver se seu sistema aguenta a movimentação de um feriado!",
+      "O feriado tá chegando e a saída de porções de frutos do mar é insana. A fila no caixa dá a volta no quiosque e a galera desiste de comprar. Preciso de agilidade de verdade, se for só mais uma maquininha comum, nem perde meu tempo.",
     playerArguments: [
       {
-        id: "gestao_mesas",
-        name: "Gestão de Mesas com Cielo LIO",
-        text: "A Cielo LIO permite abrir e fechar contas de mesa direto na máquina. Cada garçom carrega a sua e fecha a conta na hora, sem fila no caixa.",
-        power: 55,
+        id: "lio_totem",
+        name: "Autoatendimento com LIO",
+        text: "Podemos usar a Cielo LIO como um totem de autoatendimento. O próprio cliente escolhe a porção de camarão, paga na máquina e só vai ao balcão retirar. Cortamos a etapa do caixa!",
+        power: 70,
         requiredProduct: "cielo_lio",
         rhetoric: {
           question:
-            "E como ficam as minhas margens se eu tiver que vender no crédito?",
+            "A ideia do totem é bonita na teoria... Mas como você me garante que essa fila vai realmente diminuir e não só causar confusão na hora que o turista for usar?",
           responses: [
             {
               textOption:
-                "Oferecemos antecipação de recebíveis no mesmo dia e você pode embutir o custo na venda.",
-              textPlayer: "A resposta foi matemática e certeira!",
+                "A LIO automatiza o pedido e o pagamento em uma interface muito intuitiva. O autoatendimento tira a dependência de um funcionário no caixa, diluindo a fila imediatamente.",
+              textPlayer:
+                "Você cravou a solução! A automação garante a fluidez do quiosque.",
               type: "super",
             },
             {
               textOption:
-                "O crédito traz mais pessoas, acaba compensando a taxa.",
-              textPlayer: "Argumento válido, mas superficial.",
+                "As pessoas já usam telas de autoatendimento em fast-food, então elas vão se virar bem rápido na LIO.",
+              textPlayer:
+                "Foi um bom ponto, mas o Léo queria ouvir mais sobre o sistema da máquina.",
               type: "normal",
             },
             {
               textOption:
-                "Você só vai perder alguns centavos, não dói no bolso.",
+                "Se a fila não diminuir, pelo menos quer dizer que a comida é boa e o quiosque tá bombando, né?",
               textPlayer:
-                "O cliente detestou sua falta de sensibilidade financeira.",
+                "Léo bufou. Ele quer resolver a fila, não ouvir frase de para-choque de caminhão.",
               type: "invalid",
             },
           ],
         },
       },
       {
-        id: "pix_rapido",
-        name: "Pix na Maquininha",
-        text: "Gera QR Code Pix direto na tela. O turista paga na hora e o dinheiro cai instantaneamente na sua conta, sem demora!",
-        power: 50,
+        id: "controle_estoque",
+        name: "Controle de Estoque na LIO",
+        text: "O sistema da LIO faz o controle do seu estoque de frutos do mar. Você sabe em tempo real o que está acabando e abastece a cozinha com velocidade antes de dar falta no rush.",
+        power: 65,
+        requiredProduct: "cielo_lio",
       },
       {
-        id: "dupla_conexao",
-        name: "Dupla Conexão (Wi-Fi + Chip)",
-        text: "Na praia o sinal oscila. A Cielo trabalha com Wi-Fi e chip 4G simultaneamente — se um cai, o outro assume. Sem venda perdida!",
-        power: 60,
+        id: "lio_parceiros",
+        name: "Parceiros de Engajamento",
+        text: "A LIO Integrada trabalha com parceiros de gestão e fidelidade. Você organiza o quiosque e ainda engaja o turista para voltar no dia seguinte através de promoções direto na tela.",
+        power: 55,
+        requiredProduct: "cielo_lio",
       },
       {
-        id: "ofender_concorrente",
-        name: "Xingar a Concorrência",
-        text: "A concorrência que você usa é um lixo, a empresa deles vai falir mês que vem!",
+        id: "ignorar_fila",
+        name: "Desconto para quem espera",
+        text: "É só dar um desconto na caipirinha pra quem tá na fila que ninguém reclama da demora!",
         power: 0,
         type: "invalid",
       },
@@ -1417,12 +1429,12 @@ export const beachNegotiations = {
     items: [],
     enemyCounters: [
       {
-        text: "No feriado eu mal tenho tempo de respirar, imagina mexer em sistema novo no meio da loucura!",
-        power: 30,
+        text: "Legal, cobrar no totem é bom. Mas o que mais você pode oferecer? Meu problema não é só passar cartão, é administrar o caos de mercadoria saindo.",
+        power: 35,
       },
       {
-        text: "Maquininha na beira do mar estraga rápido com a maresia. Já perdi duas assim.",
-        power: 35,
+        text: "Equipamento eletrônico na beira do mar estraga rápido com a maresia e mão suja de óleo. Essa tela aguenta o tranco ou vai pifar no primeiro dia de verão?",
+        power: 40,
       },
     ],
   },
@@ -1651,54 +1663,57 @@ export const industrialNegotiations = {
     enemyMaxResistance: 150,
     playerMaxConfidence: 100,
     introText:
-      "Peças caras, mão de obra pesada... o pagamento precisa ser seguro. Mostra pra mim que essa maquininha de vocês aguenta o tranco!",
+      "Ah não... de novo vocês da Cielo? Eu já tive uma experiência terrível, pedi pra cancelar a máquina, devolvi tudo, e vocês continuaram me cobrando aluguel por meses. Por que eu deveria ouvir você agora?",
     playerArguments: [
       {
-        id: "parcelamento",
-        name: "Parcelamento em até 18x",
-        text: "Serviço caro? O cliente parcela em até 18 vezes no cartão pela Cielo. Você recebe tudo antecipado e ele sai satisfeito!",
-        power: 55,
+        id: "perdao_divida",
+        name: "Perdão da Dívida",
+        text: "César, eu assumo essa responsabilidade. Como primeiro passo para a sua conversão e nossa conquista da sua confiança, vou solicitar o perdão imediato dessa dívida indevida.",
+        power: 70,
         rhetoric: {
           question:
-            "Tô achando legal a conversa... mas a mensalidade do aluguel hoje em dia pesa muito.",
+            "Zerar a cobrança errada é o mínimo, né? Mas o que vocês me garantem que irão cumprir agora para eu não ter essa dor de cabeça de novo?",
           responses: [
             {
               textOption:
-                "Dependendo do seu teto de faturamento, podemos isentar 100% do aluguel.",
-              textPlayer: "O brilho nos olhos do cliente foi imediato!",
+                "Faremos um Acordo Comercial em contrato. Como seu Gerente de Negócios, eu aciono a Central de Atendimento (CA), a Retenção e a Central de Relacionamento para blindar seu cadastro.",
+              textPlayer:
+                "Você mostrou o peso do seu cargo! O cliente viu que você vai brigar por ele internamente.",
               type: "super",
             },
             {
               textOption:
-                "A Cielo TEM opções de compra definitiva, como a Cielo ZIP.",
-              textPlayer: "Uma ótima alternativa para driblar o aluguel.",
+                "Nós vamos assinar um novo acordo comercial de parceria com tudo escrito no papel.",
+              textPlayer:
+                "Resolveu o problema, mas faltou mostrar que você vai acompanhar o processo de perto.",
               type: "normal",
             },
             {
-              textOption: "Tem que pagar pra ter qualidade, não tem jeito.",
-              textPlayer: "Você pareceu muito arrogante...",
+              textOption:
+                "Poxa, confia na minha palavra! Eu sou diferente do vendedor que te atendeu antes.",
+              textPlayer:
+                "César deu uma risada irônica. Papo de vendedor não funciona com cliente atritado.",
               type: "invalid",
             },
           ],
         },
       },
       {
-        id: "resistencia",
-        name: "Máquina Resistente",
-        text: "A Cielo LIO tem carcaça robusta e protegida contra quedas e poeira. Feita para ambientes pesados como oficinas!",
+        id: "atendimento_gn",
+        name: "Canal Direto com o GN",
+        text: "Acabou a história de ligar para robô e ficar horas na musiquinha. A partir de agora, eu sou o seu Gerente de Negócios. Você terá o meu WhatsApp pessoal para resolver qualquer pepino direto comigo.",
         power: 60,
-        requiredProduct: "cielo_lio",
       },
       {
-        id: "nota_fiscal",
-        name: "Emissão de Nota Integrada",
-        text: "A Cielo LIO emite nota fiscal direto na máquina. Menos papelada e mais controle para você e seu cliente.",
-        power: 45,
+        id: "transparencia_taxas",
+        name: "Transparência sem Surpresas",
+        text: "No nosso novo Acordo Comercial, não existe letrinha miúda ou taxa escondida de inatividade. O que combinarmos no contrato é exatamente o que vai bater no seu extrato, sem sustos no fim do mês.",
+        power: 55,
       },
       {
-        id: "fazer_pressao",
-        name: "Forçar a Venda",
-        text: "Olha, bate a meta por mim, fecha logo esse negócio hoje, vai?",
+        id: "ignorar_passado",
+        name: "Minimizar o Problema",
+        text: "Ah, isso de cobrança indevida foi no passado, sistema velho. Foca no futuro, vamos fechar a máquina nova!",
         power: 0,
         type: "invalid",
       },
@@ -1706,11 +1721,11 @@ export const industrialNegotiations = {
     items: [],
     enemyCounters: [
       {
-        text: "Minhas mãos ficam cheias de graxa, não dá pra ficar mexendo em tela touch delicada!",
-        power: 30,
+        text: "Beleza, o discurso é ótimo. Mas na hora que a máquina quebrar, quem eu ligo? Porque a última vez o suporte sumiu.",
+        power: 45,
       },
       {
-        text: "Um reparo grande pode levar dias. Se o cartão do cliente for recusado depois, perdi peça e mão de obra.",
+        text: "Um reparo grande leva dias. Se o cartão do cliente não passar na hora de buscar o carro, eu perdi peça cara e mão de obra à toa.",
         power: 35,
       },
     ],

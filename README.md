@@ -163,57 +163,82 @@ npm run build
 - Dentro da game.js é instanciado cada interior a partir da classe interiorScene, passando como parâmetro o mapa, tileset, nome do mapa e a cena pai (parentScene).
 - Utilização de objetos e json para armazenar dados de negociações e diálogos.
 
+## 0.5 - 09/04/2026
+
+#### Jogo
+
+- Adição do sistema de salvamento: Implementação de progressão persistente, mantendo seu progresso salvo, mesmo que o site feche.
+- Correção de falas e contextos das negociações: Ajustes na lógica de diálogo para que as conversas façam mais sentido com o contexto do jogo.
+- Melhoria nos designs das interfaces: Atualização visual dos HUDs e menus para uma experiência mais agradável.
+- Implementação de Sons: Adição de trilha sonora e efeitos sonoros (SFX) para as ações do jogador.
+- Adição de filtros de daltonismo
+- Adição de novos NPC's e novos diálogos.
+- Finalização da integração de todos os mapas internos
+
+#### Código
+
+- Melhoria na documentação do código;
+- Melhoria na organização do código;
+- Melhoria na qualidade do código;
+- Manutenção das classes e escalabildade
+- Reestruturação leve das pastas:
+
   ```
   ~/
   ├── index.html <- Arquivo principal do HTML do jogo
-  ├── public/ <- Arquivos para gitlab pages e imagens do jogo
+  ├── public/ <- Arquivos contendo os assets e o código fonte do jogo
       ├── assets/ <- Arquivos de assets do jogo
       │   ├── maps/ <- Mapas do jogo
       │   ├── tilesets/ <- Tilesets do jogo
       │   └── players/ <- Personagens do jogo
       └── background.png <- Arquivo de background do jogo
-  ├── src/
-    ├── core/ <- Arquivos de inicialização de imagens e configurações globais
-    │   ├── config.js
-    │   └── preloadScene.js
-    ├── credits/ <- Arquivos de créditos do que foi usado no jogo
-    │   └── index.md
-    ├── data/ <- Arquivos de dados do jogo (JSONs contendo os diálogos e negociações)
-    │   ├── negotiations.js
-    │   └── npcs.js
-    ├── entities/ <- Arquivos de entidades do jogo
-    │   ├── NPC.js
-    │   └── Player.js
-    ├── managers/ <- Classes de gerenciadores do jogo
-    │   ├── AnimationManager.js
-    │   ├── DialogManager.js
-    │   ├── WorldManager.js
-    │   ├── ProgressManager.js
-    │   ├── MarkerManager.js
-    │   └── NPCManager.js
-    ├── scenes/ <- Arquivos de cenas do jogo
-    │   ├── negotiation/ <- Arquivos de cenas de negociação
-    │   │   └── NegotiationScene.js
-    │   ├── maps/ <- Arquivos de cenas de mundo
-    │   │   ├── CityScene.js
-    |   |   ├── interiorScene.js
-    │   │   ├── FarmScene.js
-    │   │   ├── BeachScene.js
-    │   │   ├── IndustrialScene.js
-    │   │   └── CieloScene.js
-    │   └── menus/ <- Arquivos de cenas de menus
-    │       ├── CharacterSelectScene.js
-    │       ├── MenuScene.js
-    │       ├── PauseScene.js
-    │       ├── WorldMapScene.js
-    │       └── SettingsScene.js
-    │   └── ui/ <- Arquivos de cenas de interface
-    │       ├── CieloDexScene.js
-    │       ├── InventoryScene.js
-    │       ├── TutorialOverlayScene.js
-    │       ├── MobileHudScene.js
-    │       └── PlayerHudScene.js
-    └── game.js <- Arquivo principal do jogo
+      ├── src/ <- Código fonte do jogo
+      │   ├── core/ <- Arquivos de inicialização de imagens e configurações globais
+      │   │   ├── config.js
+      │   │   └── preloadScene.js
+      │   ├── credits/ <- Arquivos de créditos do que foi usado no jogo
+      │   │   └── index.md
+      │   ├── data/ <- Arquivos de dados do jogo (JSONs contendo os diálogos e negociações)
+      │   │   ├── negotiations.js
+      │   │   └── npcs.js
+      │   ├── entities/ <- Arquivos de entidades do jogo
+      │   │   ├── NPC.js
+      │   │   └── Player.js
+      │   ├── managers/ <- Classes de gerenciadores do jogo
+      │   │   ├── AnimationManager.js
+      │   │   ├── DialogManager.js
+      │   │   ├── WorldManager.js
+      │   │   ├── ProgressManager.js
+      │   │   ├── MarkerManager.js
+      │   │   └── NPCManager.js
+      │   ├── scenes/ <- Arquivos de cenas do jogo
+      │   │   ├── negotiation/ <- Arquivos de cenas de negociação
+      │   │   │   └── NegotiationScene.js
+      │   │   ├── maps/ <- Arquivos de cenas de mundo
+      │   │   │   ├── CityScene.js
+      │   │   │   ├── interiorScene.js
+      │   │   │   ├── FarmScene.js
+      │   │   │   ├── BeachScene.js
+      │   │   │   ├── IndustrialScene.js
+      │   │   │   └── CieloScene.js
+      │   │   └── menus/ <- Arquivos de cenas de menus
+      │   │       ├── CharacterSelectScene.js
+      │   │       ├── MenuScene.js
+      │   │       ├── NameInputScene.js
+      │   │       ├── PauseScene.js
+      |   |       ├── SaveSelectScene.js
+      │   │       ├── WorldMapScene.js
+      │   │       └── SettingsScene.js
+      │   └── ui/ <- Arquivos de cenas de interface
+      │   |   ├── CieloDexScene.js
+      │   |   ├── InventoryScene.js
+      │   |   ├── TutorialOverlayScene.js
+      │   |   ├── MobileHudScene.js
+      │   |   └── PlayerHudScene.js
+      |   └── utils/ <- Arquivos de utilidades do jogo
+      |       ├── ColorBlind.js
+      |       └── SaveSystem.js
+      └── game.js <- Arquivo principal do jogo
 
   ```
 

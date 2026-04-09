@@ -6,6 +6,7 @@
 
 import Phaser from "phaser";
 import { AnimationManager } from "../../managers/AnimationManager";
+import { SaveSystem } from "../../utils/SaveSystem";
 
 /**
  * Cena de seleção de personagem.
@@ -115,6 +116,9 @@ export class CharacterSelectScene extends Phaser.Scene {
       onComplete: () => {
         this.cameras.main.fadeOut(500, 0, 0, 0);
         this.cameras.main.once("camerafadeoutcomplete", () => {
+          // Salva a escolha de personagem no registry e grava o primeiro save
+          this.registry.set("playerSprite", charKey);
+          SaveSystem.saveCurrentState(this);
           this.scene.start("CieloScene", { character: charKey });
         });
       },

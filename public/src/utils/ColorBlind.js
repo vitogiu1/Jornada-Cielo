@@ -65,8 +65,6 @@ export class ColorBlind {
    */
   static applyFilter(filterType) {
     // Aplica o filtro no game-container inteiro ao invés do canvas.
-    // Isso evita que o `<canvas>` ganhe um z-index superior próprio e
-    // cubra/engula os elementos DOM `<input>` nativos gerados por cima dele.
     const container = document.querySelector("#game-container");
     if (!container) return;
 

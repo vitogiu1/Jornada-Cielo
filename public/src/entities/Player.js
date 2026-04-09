@@ -60,10 +60,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     // Evita som fantasma/vazamento quando a cena for pausada ou colocada para dormir
     scene.events.on("pause", () => {
-      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.pause();
+      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.stop();
     });
     scene.events.on("sleep", () => {
-      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.pause();
+      if (this.walkSound && this.walkSound.isPlaying) this.walkSound.stop();
     });
 
     // Limpa o som para evitar vazamento de memória e sobreposição
@@ -187,7 +187,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       }
     } else {
       if (this.walkSound.isPlaying) {
-        this.walkSound.pause();
+        this.walkSound.stop();
       }
     }
 

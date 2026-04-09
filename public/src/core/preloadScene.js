@@ -38,8 +38,7 @@ export class PreloadScene extends Phaser.Scene {
       console.warn(`Erro ao carregar o recurso: ${file.src}`);
     });
 
-    // Imagem de fundo do menu principal.
-    this.load.image("menu_bg", "assets/background.png");
+    // Núvens do menu principal
     this.load.spritesheet("clouds", "assets/tilesets/cloud_tiles.png", {
       frameWidth: 128,
       frameHeight: 128,
@@ -276,6 +275,7 @@ export class PreloadScene extends Phaser.Scene {
 
     // Spritesheets dos NPCs
     const npcs = [
+      "npc",
       "npc4",
       "npc_praia",
       "npc_praia2",

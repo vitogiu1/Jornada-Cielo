@@ -24,6 +24,58 @@ export class NameInputScene extends Phaser.Scene {
     // Fundo escuro com partículas/glows herdado do modelo do SettingsScene
     this._buildBackground(width, height, cx);
 
+    // BOTÃO VOLTAR
+    const backBtnX = isMobile ? 60 : 80;
+    const backBtnY = isMobile ? 40 : 50;
+    const backBtnW = 100;
+    const backBtnH = 40;
+
+    const backGfx = this.add.graphics();
+    backGfx.fillStyle(0xffffff, 0.1);
+    backGfx.fillRoundedRect(
+      backBtnX - backBtnW / 2,
+      backBtnY - backBtnH / 2,
+      backBtnW,
+      backBtnH,
+      12,
+    );
+    backGfx.lineStyle(2, 0xffffff, 0.4);
+    backGfx.strokeRoundedRect(
+      backBtnX - backBtnW / 2,
+      backBtnY - backBtnH / 2,
+      backBtnW,
+      backBtnH,
+      12,
+    );
+
+    this.add
+      .text(backBtnX, backBtnY, "❮ VOLTAR", {
+        fontFamily: "Arial",
+        fontSize: "14px",
+        fontStyle: "bold",
+        color: "#ffffff",
+        letterSpacing: 1,
+      })
+      .setOrigin(0.5);
+
+    const backHitZone = this.add
+      .rectangle(backBtnX, backBtnY, backBtnW, backBtnH, 0x000000, 0)
+      .setInteractive({ useHandCursor: true });
+
+    backHitZone.on("pointerover", () => backGfx.setAlpha(0.6));
+    backHitZone.on("pointerout", () => backGfx.setAlpha(1));
+    backHitZone.on("pointerdown", () => {
+      // Retira o foco do input caso esteja ativo para evitar bugs visuais no DOM
+      if (this.nameInput && this.nameInput.node) {
+        this.nameInput.node.blur();
+      }
+
+      this.cameras.main.fadeOut(300, 0, 0, 0);
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.scene.start("SaveSelectScene");
+      });
+    });
+
     // Card principal
     const cardW = Math.min(width - 80, 500);
     const cardH = 320; // Aumentado de 260 para 320 para dar mais espaço
@@ -154,13 +206,13 @@ export class NameInputScene extends Phaser.Scene {
     if (name.length === 0) {
       this.nameInput.node.style.border = "2px solid #ff4444";
       this.nameInput.node.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.6)";
-      
+
       try {
         const vol = this.registry.get("sfxVolume") ?? 0.7;
         this.sound.play("sfx_error", { volume: vol });
       } catch (e) {}
 
-      // Efeito de tremor (shake) 
+      // Efeito de tremor (shake)
       const startX = this.nameInput.x;
       this.tweens.add({
         targets: this.nameInput,
@@ -170,10 +222,10 @@ export class NameInputScene extends Phaser.Scene {
         duration: 50,
         onComplete: () => {
           this.nameInput.x = startX;
-        }
+        },
       });
-      
-      return; 
+
+      return;
     }
 
     // Salva globalmente

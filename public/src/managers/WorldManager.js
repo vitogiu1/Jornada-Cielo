@@ -90,6 +90,15 @@ export class WorldManager {
   }
 
   /**
+   * Busca um mundo pelo nome da cena correspondente.
+   * @param {string} sceneKey
+   * @returns {WorldNode|undefined}
+   */
+  static getWorldBySceneKey(sceneKey) {
+    return WORLDS.find((w) => w.sceneKey === sceneKey);
+  }
+
+  /**
    * Verifica se um mundo está desbloqueado.
    * @param {string} id
    * @returns {boolean}

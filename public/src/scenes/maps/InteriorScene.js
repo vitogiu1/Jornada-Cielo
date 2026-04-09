@@ -8,9 +8,11 @@
 import Phaser from "phaser";
 import { Player } from "../../entities/Player";
 import { NPCManager } from "../../managers/NPCManager";
-import { MarkerManager } from "../../managers/MarkerManager";
 import { interiorNPCs } from "../../data/npcs";
 import { ProgressManager } from "../../managers/ProgressManager";
+import { AnimationManager } from "../../managers/AnimationManager";
+import { WorldManager } from "../../managers/WorldManager";
+import { MarkerManager } from "../../managers/MarkerManager";
 
 /**
  * Cena genérica de interior.
@@ -44,14 +46,20 @@ export class InteriorScene extends Phaser.Scene {
    */
   init(data) {
     this.spawnPoint = data || {};
-    this.characterKey = this.spawnPoint.character || "amanda";
-    this.spawnX = Number.isFinite(this.spawnPoint.x) ? this.spawnPoint.x : null;
-    this.spawnY = Number.isFinite(this.spawnPoint.y) ? this.spawnPoint.y : null;
+    this.characterKey =
+      this.spawnPoint.character ||
+      this.registry.get("playerSprite") ||
+      "amanda";
     this.isTransitioning = false;
   }
 
   /** @param {object} [data] - Dados de spawn (fallback para `this.spawnPoint`). */
   create(data = this.spawnPoint) {
+    // Persiste estado de localização
+    this.registry.set("lastScene", this.scene.key);
+    // Tenta definir o world ID baseado na cena pai
+    const world = WorldManager.getWorldBySceneKey(this.cfg.parentScene);
+    if (world) this.registry.set("lastWorldId", world.id);
     this.checkHUD();
 
     // ── Tilemap ──────────────────────────────────────────────────────────
@@ -119,6 +127,9 @@ export class InteriorScene extends Phaser.Scene {
     // Posição padrão: centro horizontal, próximo da borda inferior (porta de saída).
     const spawnX = map.widthInPixels / 2;
     const spawnY = map.heightInPixels - 200;
+
+    // Registra animações se necessário
+    AnimationManager.createAnimations(this, this.characterKey);
 
     this.player = new Player(this, spawnX, spawnY, this.characterKey, {
       scale: 3,

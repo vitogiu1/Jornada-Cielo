@@ -6,6 +6,7 @@
  */
 
 import Phaser from "phaser";
+import { SaveSystem } from "../../utils/SaveSystem";
 
 export class PlayerHudScene extends Phaser.Scene {
   constructor() {
@@ -18,7 +19,9 @@ export class PlayerHudScene extends Phaser.Scene {
    */
   init(data) {
     // Define a personagem escolhida (padrão: "amanda").
-    this.characterKey = data.character || "amanda";
+    // Prioriza o que vem no data, depois o que está no registry (importante para saves carregados), e fallback final "amanda".
+    this.characterKey =
+      data?.character || this.registry.get("playerSprite") || "amanda";
 
     // Define nível e XP caso ainda não existam no registro global.
     if (
@@ -101,7 +104,7 @@ export class PlayerHudScene extends Phaser.Scene {
       this.avatarSprite.play(`${this.characterKey}-idle-down`);
     }
 
-    // Máscara circular para recortar o sprite no formato do avatar. - Uso de IA para os próximos cálculos
+    // Máscara circular para recortar o sprite no formato do avatar.
     const shape = this.make.graphics();
     shape.fillCircle(avatarX + paddingX, avatarY + paddingY, avatarRadius - 2);
     const mask = shape.createGeometryMask();
@@ -172,7 +175,9 @@ export class PlayerHudScene extends Phaser.Scene {
       this.barFill,
     ]);
 
+    // ==========================================
     // HUD DE CONFIANÇA (canto superior direito)
+    // ==========================================
     const confWidth = isMobile ? 135 : 200;
     const confHeight = isMobile ? 38 : 50;
     const confX = width - confWidth - paddingX;
@@ -207,14 +212,27 @@ export class PlayerHudScene extends Phaser.Scene {
       .setOrigin(0.5);
     this.confContainer.add(this.confEmojiText);
 
-    // Texto com o percentual de confiança.
+    // Posições base para os textos
+    const labelX = emojiX + (isMobile ? 18 : 35);
+    const textY = emojiY - (isMobile ? 12 : 15);
+
+    // Texto escrito "Confiança" (agora mais natural e proporcional)
+    this.confLabelText = this.add.text(labelX, textY, "Confiança", {
+      fontFamily: "Arial",
+      fontSize: isMobile ? "13px" : "15px", // Mesmo tamanho do percentual
+      fontWeight: "bold",
+      color: "#88aaff",
+    });
+    this.confContainer.add(this.confLabelText);
+
+    // Texto com o percentual de confiança (mesma fonte e tamanho)
     this.confPercentText = this.add.text(
-      emojiX + (isMobile ? 18 : 35),
-      emojiY - (isMobile ? 10 : 16),
+      labelX + (isMobile ? 68 : 82), // Espaçamento ajustado para encaixar perfeitamente ao lado
+      textY,
       "100%",
       {
-        fontFamily: "Courier New",
-        fontSize: isMobile ? "12px" : "18px",
+        fontFamily: "Arial", // Mudamos de Courier New para Arial para harmonizar
+        fontSize: isMobile ? "13px" : "15px", // Mesmo tamanho do texto "Confiança"
         fontWeight: "bold",
         color: "#ffffff",
       },
@@ -228,25 +246,13 @@ export class PlayerHudScene extends Phaser.Scene {
 
     // Fundo cinza da barra de confiança.
     this.confBarBg = this.add
-      .rectangle(
-        emojiX + (isMobile ? 18 : 35),
-        confBarY,
-        confBarW,
-        confBarH,
-        0x333333,
-      )
+      .rectangle(labelX, confBarY, confBarW, confBarH, 0x333333)
       .setOrigin(0, 0.5);
     this.confContainer.add(this.confBarBg);
 
     // Preenchimento colorido da barra de confiança.
     this.confBarFill = this.add
-      .rectangle(
-        emojiX + (isMobile ? 18 : 35),
-        confBarY,
-        confBarW,
-        confBarH,
-        0x00adef,
-      )
+      .rectangle(labelX, confBarY, confBarW, confBarH, 0x00adef)
       .setOrigin(0, 0.5);
     this.confContainer.add(this.confBarFill);
 
@@ -335,6 +341,20 @@ export class PlayerHudScene extends Phaser.Scene {
 
     // Escuta redimensionamento da tela.
     this.scale.on("resize", this.resize, this);
+
+    // Autosave a cada 30 segundos enquanto o HUD estiver ativo.
+    this._autosaveTimer = this.time.addEvent({
+      delay: 30000,
+      loop: true,
+      callback: () => {
+        SaveSystem.saveCurrentState(this);
+      },
+    });
+
+    // Limpa o timer ao desligar a cena.
+    this.events.on("shutdown", () => {
+      if (this._autosaveTimer) this._autosaveTimer.destroy();
+    });
   }
 
   // ── OBJETIVOS HUD ──

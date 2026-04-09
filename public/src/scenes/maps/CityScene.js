@@ -6,6 +6,7 @@
 
 import Phaser from "phaser";
 import { Player } from "../../entities/Player";
+import { AnimationManager } from "../../managers/AnimationManager";
 import { GameConfig } from "../../core/config";
 import { NPCManager } from "../../managers/NPCManager";
 import { cityNPCs } from "../../data/npcs";
@@ -27,7 +28,8 @@ export class CityScene extends Phaser.Scene {
   /** Recebe o personagem e os dados de spawn vindos de outra cena. */
   init(data) {
     this.spawnPoint = data || {};
-    this.characterKey = this.spawnPoint.character || "amanda";
+    this.characterKey =
+      this.spawnPoint.character || this.registry.get("playerSprite") || "amanda";
     this.isTransitioning = false;
     this.canTeleport = true;
     this.mapY = 0;
@@ -36,6 +38,9 @@ export class CityScene extends Phaser.Scene {
   }
 
   create(data = this.spawnPoint) {
+    // Persiste estado de localização
+    this.registry.set("lastScene", "CityScene");
+    this.registry.set("lastWorldId", "city");
     // Gerenciamento da trilha sonora: se uma música de mapa já estiver tocando, ela é parada para o início da nova.
     const mapMusics = [
       "farm_music",
@@ -178,20 +183,19 @@ export class CityScene extends Phaser.Scene {
     const farmSpawnY = farmRoadY;
 
     // Escolhe o ponto de spawn conforme a cena de origem.
-    const spawnX = Number.isFinite(data?.x)
-      ? data.x
-      : this.spawnAtCieloDoor
+    const spawnX = this.spawnAtCieloDoor
         ? cieloSpawnX
         : this.spawnFromFarm
           ? farmSpawnX
           : defaultSpawnX;
-    const spawnY = Number.isFinite(data?.y)
-      ? data.y
-      : this.spawnAtCieloDoor
+    const spawnY = this.spawnAtCieloDoor
         ? cieloSpawnY
         : this.spawnFromFarm
           ? farmSpawnY
           : defaultSpawnY;
+
+    // Registra animações se necessário
+    AnimationManager.createAnimations(this, this.characterKey);
 
     // Cria o jogador no ponto de spawn.
     this.player = new Player(this, spawnX, spawnY, this.characterKey, {

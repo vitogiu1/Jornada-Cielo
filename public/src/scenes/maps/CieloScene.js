@@ -25,14 +25,16 @@ export class CieloScene extends Phaser.Scene {
   init(data) {
     this.isTransitioning = false;
     this.spawnPoint = data || {};
-    this.characterKey = this.spawnPoint.character || "amanda";
+    this.characterKey =
+      this.spawnPoint.character || this.registry.get("playerSprite") || "amanda";
     this.mapY = 0;
-    this.spawnX = Number.isFinite(this.spawnPoint.x) ? this.spawnPoint.x : null;
-    this.spawnY = Number.isFinite(this.spawnPoint.y) ? this.spawnPoint.y : null;
     this.fromCity = Boolean(this.spawnPoint.fromCity);
   }
 
   create(data = this.spawnPoint) {
+    // Persiste estado de localização
+    this.registry.set("lastScene", "CieloScene");
+    this.registry.set("lastWorldId", "city"); // Cielo HQ is in the city world area
     // Inicia o HUD do jogador se ainda não estiver ativo.
     if (!this.scene.isActive("PlayerHudScene")) {
       this.scene.launch("PlayerHudScene", { character: this.characterKey });

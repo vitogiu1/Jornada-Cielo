@@ -26,9 +26,14 @@ export class WorldMapScene extends Phaser.Scene {
    * @param {{ character?: string }} data - Dados passados via `scene.start`.
    */
   init(data) {
-    this.characterKey = data.character || "amanda";
-    this.selectedIndex = 0; // Índice do nó atualmente selecionado
-    this.isAnimating = false; // Trava para impedir ações durante animações
+    // Busca a personagem preferencialmente no registro caso o data esteja vazio
+    this.characterKey =
+      data?.character || this.registry.get("playerSprite") || "amanda";
+    this.isAnimating = false;
+
+    // Tenta carregar o último mundo visitado do registro
+    const lastWorld = this.registry.get("lastWorldId") || "city";
+    this.lastWorld = lastWorld;
   }
 
   create() {
@@ -39,6 +44,16 @@ export class WorldMapScene extends Phaser.Scene {
     if (!ProgressManager.reg) {
       ProgressManager.init(this.registry);
     }
+
+    // Define o índice baseado no último mundo
+    this.selectedIndex = Math.max(
+      0,
+      this.worlds.findIndex((w) => w.id === this.lastWorld),
+    );
+
+    // Registra esta cena como a última ativa
+    this.registry.set("lastScene", "WorldMapScene");
+    this.registry.set("lastWorldId", this.worlds[this.selectedIndex].id);
 
     // ── Fundo ────────────────────────────────────────────────────────────
     // Imagem de fundo redimensionada para cobrir toda a tela (cover)
@@ -407,6 +422,8 @@ export class WorldMapScene extends Phaser.Scene {
     if (!isNeighborUnlocked) return;
 
     this.navigateTo(neighborIdx);
+    // Persiste o mundo selecionado
+    this.registry.set("lastWorldId", this.worlds[neighborIdx].id);
   }
 
   /**

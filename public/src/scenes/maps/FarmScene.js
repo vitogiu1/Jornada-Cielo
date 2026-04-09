@@ -6,6 +6,7 @@
 
 import Phaser from "phaser";
 import { Player } from "../../entities/Player";
+import { AnimationManager } from "../../managers/AnimationManager";
 import { GameConfig } from "../../core/config";
 import { NPCManager } from "../../managers/NPCManager";
 import { farmNPCs } from "../../data/npcs";
@@ -25,7 +26,8 @@ export class FarmScene extends Phaser.Scene {
 
   /** Recebe o personagem e os dados de spawn vindos de outra cena. */
   init(data) {
-    this.characterKey = data.character || "amanda";
+    this.characterKey =
+      data.character || this.registry.get("playerSprite") || "amanda";
     this.isTransitioning = false;
     this.mapY = 0;
     this.spawnFromCentro = Boolean(data.spawnFromCentro);
@@ -33,6 +35,9 @@ export class FarmScene extends Phaser.Scene {
   }
 
   create() {
+    // Persiste estado de localização
+    this.registry.set("lastScene", "FarmScene");
+    this.registry.set("lastWorldId", "farm");
     // Abre o HUD do jogador se ainda não estiver ativo.
     if (!this.scene.isActive("PlayerHudScene")) {
       this.scene.launch("PlayerHudScene", { character: this.characterKey });
@@ -132,15 +137,18 @@ export class FarmScene extends Phaser.Scene {
 
     // Escolhe o ponto de spawn conforme a cena de origem.
     const spawnX = this.spawnFromCentro
-      ? centroSpawnX
-      : this.spawnFromPraia
-        ? praiaReturnSpawnX
-        : defaultSpawnX;
+        ? centroSpawnX
+        : this.spawnFromPraia
+          ? praiaReturnSpawnX
+          : defaultSpawnX;
     const spawnY = this.spawnFromCentro
-      ? centroSpawnY
-      : this.spawnFromPraia
-        ? praiaReturnSpawnY
-        : defaultSpawnY;
+        ? centroSpawnY
+        : this.spawnFromPraia
+          ? praiaReturnSpawnY
+          : defaultSpawnY;
+
+    // Registra animações se necessário
+    AnimationManager.createAnimations(this, this.characterKey);
 
     // Cria o jogador no ponto de spawn.
     this.player = new Player(this, spawnX, spawnY, this.characterKey, {

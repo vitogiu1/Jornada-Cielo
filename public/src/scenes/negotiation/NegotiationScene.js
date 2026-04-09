@@ -175,6 +175,29 @@ export class NegotiationScene extends Phaser.Scene {
         color: "#ddd",
       })
       .setOrigin(0.5);
+
+    // --- LÓGICA DO CLIENTE ATRITADO ---
+    // Verifica se é a negociação específica da mecânica
+    // --- LÓGICA DO CLIENTE ATRITADO ---
+    // Verifica se é a negociação específica da mecânica
+    if (this.negotiationId === "mecanica_ind_1") {
+      const tagOffset = this._isMobile ? 65 : 95; // Calcula a distância acima da cabeça
+
+      // Adiciona a tag vermelha dinamicamente acima do sprite
+      this.add
+        .text(
+          w * 0.75, // Posição X: Centralizado com o NPC
+          avatarY - tagOffset, // Posição Y: Acima da cabeça do sprite
+          "CLIENTE ATRITADO",
+          {
+            fontFamily: "monospace",
+            fontSize: this._isMobile ? "11px" : "14px",
+            color: "#ff4444", // Vermelho
+            fontStyle: "bold",
+          },
+        )
+        .setOrigin(0.5); // Centralizado perfeitamente no meio
+    }
   }
 
   /** Cria as barras de confiança do jogador e de resistência do inimigo. */
@@ -200,7 +223,7 @@ export class NegotiationScene extends Phaser.Scene {
 
     // Barra do inimigo (verde, à direita, representa o nível de convencimento).
     this.add
-      .text(w * 0.92, labelY, "Confiança do Cliente", {
+      .text(w * 0.92, labelY, "Taxa de Conversão", {
         fontFamily: "monospace",
         fontSize: labelSize,
         color: "#aaa",

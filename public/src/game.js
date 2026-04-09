@@ -17,6 +17,7 @@ import { EndingScene } from "./scenes/menus/EndingScene";
 import { WorldMapScene } from "./scenes/menus/WorldMapScene";
 import { NegotiationScene } from "./scenes/negotiation/NegotiationScene";
 import { PauseScene } from "./scenes/menus/PauseScene";
+import { SaveSelectScene } from "./scenes/menus/SaveSelectScene";
 import { MobileHudScene } from "./scenes/ui/MobileHudScene";
 import { PlayerHudScene } from "./scenes/ui/PlayerHudScene";
 import { PreloadScene } from "./core/preloadScene";
@@ -253,6 +254,7 @@ const config = {
     PreloadScene,
     MenuScene,
     SettingsScene,
+    SaveSelectScene,
     NameInputScene,
     EndingScene,
     CieloScene,
@@ -330,9 +332,7 @@ const game = new Phaser.Game(config);
 
 // Inicializa a aba de Filtro de Daltonismo e aplica caso tenha no Registry do cache / LocalStorage
 ColorBlind.initFilters();
-game.events.once('ready', () => {
-  // Como o Phaser.Registry de cada cena é resetado dependendo do ciclo,
-  // vamos usar localStorage para persistir de verdade a configuração de Daltonismo.
+game.events.once("ready", () => {
   const savedFilter = localStorage.getItem("daltonismFilter") || "none";
   ColorBlind.applyFilter(savedFilter);
 });
